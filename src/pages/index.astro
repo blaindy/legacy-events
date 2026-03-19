@@ -1,6 +1,16 @@
 ---
 import { Image } from 'astro:assets';
 import '../styles/global.css';
+import logoMark from '../assets/logo-mark.svg';
+import heroImage from '../assets/hero.jpg';
+import mapImage from '../assets/map.png';
+import weddingsImage from '../assets/space-weddings.jpg';
+import corporateImage from '../assets/space-corporate.jpg';
+import privateImage from '../assets/space-private.jpg';
+import cateringIcon from '../assets/amenity-catering.svg';
+import avIcon from '../assets/amenity-av.svg';
+import bridalIcon from '../assets/amenity-bridal.svg';
+import valetIcon from '../assets/amenity-valet.svg';
 
 const venueName = 'Legacy Events';
 const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
@@ -9,25 +19,22 @@ const pageTitle = `${venueName} | Event Venue in Belleville, ON`;
 const pageDescription =
   `${venueName} hosts unforgettable weddings, corporate galas, and private celebrations in Belleville, Ontario.`;
 const canonicalUrl = `${siteUrl}/`;
-
-const heroImage = '/assets/hero.jpg';
-const logoMark = '/assets/logo-mark.svg';
-const mapImage = '/assets/map.png';
+const ogImagePath = '/assets/hero.jpg';
 
 const spaces = [
   {
     title: 'Weddings',
-    image: '/assets/space-weddings.jpg',
+    image: weddingsImage,
     text: 'Romantic ballroom layouts, curated timelines, and personalized setup for ceremonies and receptions.',
   },
   {
     title: 'Corporate Galas',
-    image: '/assets/space-corporate.jpg',
+    image: corporateImage,
     text: 'Professional staging with premium lighting and seamless service for awards, launches, and fundraisers.',
   },
   {
     title: 'Private Parties',
-    image: '/assets/space-private.jpg',
+    image: privateImage,
     text: 'From anniversaries to milestone birthdays, celebrate with flexible spaces designed for elegant gatherings.',
   },
 ];
@@ -38,19 +45,19 @@ const amenityCopy =
 const amenities = [
   {
     name: 'In-house Catering',
-    icon: '/assets/amenity-catering.svg',
+    icon: cateringIcon,
   },
   {
     name: 'AV Equipment',
-    icon: '/assets/amenity-av.svg',
+    icon: avIcon,
   },
   {
     name: 'Bridal Suite',
-    icon: '/assets/amenity-bridal.svg',
+    icon: bridalIcon,
   },
   {
     name: 'Valet Parking',
-    icon: '/assets/amenity-valet.svg',
+    icon: valetIcon,
   },
 ];
 
@@ -59,16 +66,18 @@ const structuredData = JSON.stringify({
   '@type': 'EventVenue',
   name: venueName,
   url: siteUrl,
-  image: `${siteUrl}${heroImage}`,
+  image: `${siteUrl}${ogImagePath}`,
   telephone: '+1-613-555-0148',
   email: 'events@legacyevents.com',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '1240 Dundas St E',
-    addressLocality: 'Belleville',
-    addressRegion: 'ON',
-    addressCountry: 'CA',
-  },
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '1240 Dundas St E',
+      addressLocality: 'Belleville',
+      addressRegion: 'ON',
+      postalCode: 'K8N 5R8',
+      addressCountry: 'CA',
+    },
+  areaServed: 'Ontario',
   sameAs: ['https://instagram.com', 'https://facebook.com', 'https://linkedin.com'],
 });
 ---
@@ -84,17 +93,23 @@ const structuredData = JSON.stringify({
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={pageDescription} />
+    <meta name="author" content={venueName} />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en-CA" href={canonicalUrl} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={venueName} />
+    <meta property="og:locale" content="en_CA" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={`${siteUrl}${heroImage}`} />
+    <meta property="og:image" content={`${siteUrl}${ogImagePath}`} />
     <meta property="og:image:alt" content="Elegant event ballroom at Legacy Events" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
-    <meta name="twitter:image" content={`${siteUrl}${heroImage}`} />
+    <meta name="twitter:image" content={`${siteUrl}${ogImagePath}`} />
+    <meta name="twitter:image:alt" content="Elegant event ballroom at Legacy Events" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -106,7 +121,7 @@ const structuredData = JSON.stringify({
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
       <section aria-labelledby="hero-heading" class="container-shell flex flex-col items-center pt-12 md:pt-20">
         <div class="flex w-full max-w-[377px] flex-col items-center gap-5">
           <Image src={logoMark} alt="" aria-hidden="true" width={71} height={72} class="h-[72px] w-[71px]" loading="eager" />
@@ -122,7 +137,20 @@ const structuredData = JSON.stringify({
       </section>
 
       <section class="relative h-[390px] w-full overflow-hidden md:h-[550px]">
-        <Image src={heroImage} alt="" aria-hidden="true" width={1920} height={550} class="absolute inset-0 h-full w-full object-cover" loading="eager" fetchpriority="high" />
+        <Image
+          src={heroImage}
+          alt=""
+          aria-hidden="true"
+          width={1920}
+          height={550}
+          widths={[768, 1280, 1920]}
+          sizes="100vw"
+          format="webp"
+          quality={80}
+          class="absolute inset-0 h-full w-full object-cover"
+          loading="eager"
+          fetchpriority="high"
+        />
         <div class="absolute inset-0 bg-gradient-to-b from-white/100 from-[6.5%] to-transparent to-[55.5%]"></div>
       </section>
 
@@ -138,7 +166,18 @@ const structuredData = JSON.stringify({
           {
             spaces.map((space) => (
               <article class="soft-card bg-[color:var(--color-space-card)] p-7">
-                <Image src={space.image} alt={`${space.title} event setup at ${venueName}`} width={465} height={286} class="h-[220px] w-full rounded-lg object-cover md:h-[286px]" loading="lazy" />
+                <Image
+                  src={space.image}
+                  alt={`${space.title} event setup at ${venueName}`}
+                  width={465}
+                  height={286}
+                  widths={[320, 465, 620]}
+                  sizes="(min-width: 1024px) 30vw, 100vw"
+                  format="webp"
+                  quality={78}
+                  class="h-[220px] w-full rounded-lg object-cover md:h-[286px]"
+                  loading="lazy"
+                />
                 <h3 class="mt-3 text-2xl font-[400] leading-8 text-[color:var(--color-heading)]">{space.title}</h3>
                 <p class="body-copy mt-3">{space.text}</p>
               </article>
@@ -185,8 +224,8 @@ const structuredData = JSON.stringify({
     <footer id="contact" class="bg-[color:var(--color-brand)] py-16 text-white">
       <div class="container-shell">
         <div class="grid gap-8 lg:grid-cols-2">
-          <section>
-            <h2 class="text-2xl font-[400] leading-8 text-[color:var(--color-footer-light)]">Contact Us</h2>
+          <section aria-labelledby="contact-heading">
+            <h2 id="contact-heading" class="text-2xl font-[400] leading-8 text-[color:var(--color-footer-light)]">Contact Us</h2>
             <p id="contact-intro" class="mt-2 text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
               Share your event details and we will contact you within one business day.
             </p>
@@ -261,7 +300,18 @@ const structuredData = JSON.stringify({
 
           <section class="flex flex-col gap-8">
             <div class="soft-card overflow-hidden border border-white/20">
-              <Image src={mapImage} alt="Map of Legacy Events location" width={556} height={240} class="h-[240px] w-full object-cover" loading="lazy" />
+              <Image
+                src={mapImage}
+                alt="Map showing Legacy Events location in Belleville, Ontario"
+                width={556}
+                height={240}
+                widths={[420, 556, 900]}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                format="webp"
+                quality={74}
+                class="h-[240px] w-full object-cover"
+                loading="lazy"
+              />
             </div>
 
             <div class="grid gap-8 md:grid-cols-2">
@@ -277,13 +327,13 @@ const structuredData = JSON.stringify({
                 <nav aria-label="Legacy Events social media">
                 <ul class="mt-2 space-y-2 text-sm leading-5 text-[color:var(--color-footer-subtle)]">
                   <li>
-                    <a href="https://instagram.com" target="_blank" rel="noreferrer" class="focus-ring rounded-sm underline-offset-4 hover:underline">Instagram</a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in a new tab)" class="focus-ring rounded-sm underline-offset-4 hover:underline">Instagram</a>
                   </li>
                   <li>
-                    <a href="https://facebook.com" target="_blank" rel="noreferrer" class="focus-ring rounded-sm underline-offset-4 hover:underline">Facebook</a>
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook (opens in a new tab)" class="focus-ring rounded-sm underline-offset-4 hover:underline">Facebook</a>
                   </li>
                   <li>
-                    <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="focus-ring rounded-sm underline-offset-4 hover:underline">LinkedIn</a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)" class="focus-ring rounded-sm underline-offset-4 hover:underline">LinkedIn</a>
                   </li>
                 </ul>
                 </nav>
@@ -326,8 +376,10 @@ const structuredData = JSON.stringify({
           const submitButton = form.querySelector('button[type="submit"]');
           if (submitButton instanceof HTMLButtonElement) {
             submitButton.disabled = true;
+            submitButton.setAttribute('aria-disabled', 'true');
             submitButton.textContent = 'Sending...';
           }
+          form.setAttribute('aria-busy', 'true');
 
           try {
             const payload = new FormData(form);
@@ -351,8 +403,10 @@ const structuredData = JSON.stringify({
           } catch {
             setStatus('Network error. Please try again in a moment.', true);
           } finally {
+            form.setAttribute('aria-busy', 'false');
             if (submitButton instanceof HTMLButtonElement) {
               submitButton.disabled = false;
+              submitButton.removeAttribute('aria-disabled');
               submitButton.textContent = 'Send Inquiry';
             }
           }
