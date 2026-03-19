@@ -63,6 +63,24 @@ const amenities = [
   },
 ];
 
+const testimonials = [
+  {
+    quote:
+      'Our gala at Legacy Events was effortless from planning to final toast. The team delivered grace, precision, and unforgettable ambiance.',
+    name: 'Jane Doe',
+  },
+  {
+    quote:
+      'From first walkthrough to last dance, every detail felt intentional. Guests still talk about the atmosphere and flawless service.',
+    name: 'Michael R.',
+  },
+  {
+    quote:
+      'Legacy Events made our celebration feel elevated yet relaxed. The staff handled every transition smoothly and professionally.',
+    name: 'Alicia T.',
+  },
+];
+
 const structuredData = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'EventVenue',
@@ -124,13 +142,13 @@ const structuredData = JSON.stringify({
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <main id="main-content" tabindex="-1">
-      <section aria-labelledby="hero-heading" class="container-shell flex flex-col items-center pt-12 md:pt-20">
+      <section aria-labelledby="hero-heading" class="container-shell flex flex-col items-center pt-10 md:pt-20">
         <div class="flex w-full max-w-[377px] flex-col items-center gap-5">
           <Image src={logoMark} alt="" aria-hidden="true" width={71} height={72} class="h-[72px] w-[71px]" loading="eager" />
           <p class="font-['Fraunces'] font-[300] text-[20px] tracking-[3px] text-[color:var(--color-brand)]">LEGACY EVENTS</p>
         </div>
 
-        <div class="flex w-full max-w-[1152px] flex-col items-center justify-center gap-12 px-0 py-16 md:py-20">
+        <div class="flex w-full max-w-[1152px] flex-col items-center justify-center gap-9 px-0 pt-12 pb-8">
           <h1 id="hero-heading" class="hero-title">Where your story<br />becomes a legacy.</h1>
           <a href="#contact" class="pill-button focus-ring bg-[color:var(--color-brand)] px-8 py-3 text-white" aria-label="Get in touch with Legacy Events">
             Get in touch
@@ -164,10 +182,16 @@ const structuredData = JSON.stringify({
           </div>
         </div>
 
-        <div class="grid gap-6 lg:grid-cols-3">
+        <div
+          id="spaces-carousel"
+          class="mobile-carousel md:grid md:grid-cols-3"
+          role="region"
+          aria-label="Our spaces carousel"
+          tabindex="0"
+        >
           {
             spaces.map((space) => (
-              <article class="soft-card flex h-full flex-col gap-4 bg-[color:var(--color-space-card)] p-[25px]">
+              <article class="mobile-carousel-slide soft-card flex h-full flex-col gap-4 bg-[color:var(--color-space-card)] p-[25px]">
                 <Image
                   src={space.image}
                   alt={`${space.title} event setup at ${venueName}`}
@@ -186,6 +210,7 @@ const structuredData = JSON.stringify({
             ))
           }
         </div>
+        <div id="spaces-dots" class="carousel-dots md:hidden" aria-hidden="true"></div>
       </section>
 
       <section aria-labelledby="amenities-heading" class="w-full bg-[color:var(--color-amenity-bg)] py-16 md:py-20">
@@ -195,10 +220,16 @@ const structuredData = JSON.stringify({
             <h2 id="amenities-heading" class="section-title">Everything you need, in one venue</h2>
           </div>
 
-          <div class="mt-8 grid gap-6 lg:grid-cols-4">
+          <div
+            id="amenities-carousel"
+            class="mobile-carousel mt-8 md:grid md:grid-cols-4"
+            role="region"
+            aria-label="Amenities carousel"
+            tabindex="0"
+          >
             {
               amenities.map((amenity) => (
-                <article class="soft-card flex h-full flex-col gap-4 self-stretch bg-[color:var(--color-amenity-card)] p-[25px]">
+                <article class="mobile-carousel-slide soft-card flex h-full flex-col gap-4 self-stretch bg-[color:var(--color-amenity-card)] p-[25px]">
                   <div class="inline-flex w-fit rounded-full bg-[color:var(--color-brand)] p-3">
                     <Image src={amenity.icon} alt="" width={32} height={32} class="h-8 w-8" loading="lazy" aria-hidden="true" />
                   </div>
@@ -208,6 +239,7 @@ const structuredData = JSON.stringify({
               ))
             }
           </div>
+          <div id="amenities-dots" class="carousel-dots md:hidden" aria-hidden="true"></div>
         </div>
       </section>
 
@@ -215,10 +247,26 @@ const structuredData = JSON.stringify({
         <div class="mx-auto flex max-w-[1100px] flex-col items-center gap-7">
           <div class="h-[3px] w-24 rounded-full bg-[color:var(--color-amenity-bg)]"></div>
           <h2 id="testimonial-heading" class="sr-only">Testimonial</h2>
-          <blockquote class="quote-title" cite={siteUrl}>
-            “Our gala at Legacy Events was effortless from planning to final toast. The team delivered grace, precision, and unforgettable ambiance.”
-          </blockquote>
-          <p class="eyebrow text-[color:var(--color-muted)]">Jane Doe</p>
+
+          <div
+            id="testimonials-carousel"
+            class="testimonial-carousel w-full max-w-[1100px]"
+            role="region"
+            aria-label="Testimonials carousel"
+            tabindex="0"
+          >
+            {
+              testimonials.map((testimonial) => (
+                <article class="testimonial-slide flex w-full flex-col items-center gap-4 md:gap-7">
+                  <blockquote class="quote-title" cite={siteUrl}>
+                    “{testimonial.quote}”
+                  </blockquote>
+                  <p class="eyebrow text-[color:var(--color-muted)]">{testimonial.name}</p>
+                </article>
+              ))
+            }
+          </div>
+          <div id="testimonials-dots" class="carousel-dots" aria-hidden="true"></div>
         </div>
       </section>
     </main>
@@ -301,41 +349,51 @@ const structuredData = JSON.stringify({
           </section>
 
           <section class="flex flex-col gap-8">
-            <div class="soft-card overflow-hidden border border-white/20">
-              <Image
-                src={mapImage}
-                alt="Map showing Legacy Events location in Belleville, Ontario"
-                width={556}
-                height={240}
-                widths={[420, 556, 900]}
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                format="webp"
-                quality={74}
-                class="h-[240px] w-full object-cover"
-                loading="lazy"
-              />
+            <div>
+              <h2 class="footer-heading text-white">Visit us</h2>
+              <div class="soft-card mt-2 overflow-hidden border border-white/20">
+                <Image
+                  src={mapImage}
+                  alt="Map showing Legacy Events location in Belleville, Ontario"
+                  width={556}
+                  height={312}
+                  widths={[420, 556, 900]}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  format="webp"
+                  quality={74}
+                  class="h-[312px] w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
             </div>
 
-            <div class="grid gap-8 md:grid-cols-2">
+            <div>
               <div>
-                <h2 class="footer-heading text-white">Visit us</h2>
-                <p class="footer-copy mt-2">1240 Dundas St E, Belleville, ON</p>
+                <p class="footer-copy">1240 Dundas St E, Belleville, ON</p>
                 <p class="footer-copy mt-4"><a class="focus-ring rounded-sm underline-offset-4 hover:underline" href="tel:+16135550148">+1 (613) 555-0148</a></p>
                 <p class="footer-copy"><a class="focus-ring rounded-sm underline-offset-4 hover:underline" href="mailto:events@legacyevents.com">events@legacyevents.com</a></p>
-              </div>
-
-              <div>
-                <h2 class="footer-heading text-white">Follow</h2>
                 <nav aria-label="Legacy Events social media">
-                <ul class="footer-copy mt-2 space-y-2">
+                <ul class="mt-4 flex items-center gap-3">
                   <li>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in a new tab)" class="focus-ring rounded-sm underline-offset-4 hover:underline">Instagram</a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in a new tab)" class="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/25">
+                      <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 fill-current">
+                        <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm9.75 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"></path>
+                      </svg>
+                    </a>
                   </li>
                   <li>
-                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook (opens in a new tab)" class="focus-ring rounded-sm underline-offset-4 hover:underline">Facebook</a>
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook (opens in a new tab)" class="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/25">
+                      <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 fill-current">
+                        <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.2-1.6 1.6-1.6H16.8V4.8c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.2V11H8v3h2.4v8h3.1Z"></path>
+                      </svg>
+                    </a>
                   </li>
                   <li>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)" class="focus-ring rounded-sm underline-offset-4 hover:underline">LinkedIn</a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)" class="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/25">
+                      <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 fill-current">
+                        <path d="M6.5 8.5A1.75 1.75 0 1 1 6.5 5a1.75 1.75 0 0 1 0 3.5ZM5 10h3v9H5v-9Zm5 0h2.9v1.3h.1c.4-.8 1.4-1.6 2.8-1.6 3 0 3.5 2 3.5 4.5V19h-3v-4.1c0-1 0-2.2-1.3-2.2s-1.6 1-1.6 2.1V19h-3v-9Z"></path>
+                      </svg>
+                    </a>
                   </li>
                 </ul>
                 </nav>
@@ -352,6 +410,63 @@ const structuredData = JSON.stringify({
       const form = document.getElementById('contact-form');
       const status = document.getElementById('form-status');
       const successPanel = document.getElementById('form-success-panel');
+      const isMobile = window.matchMedia('(max-width: 767px)').matches;
+
+      const setupCarouselDots = (carouselId: string, dotsId: string, mobileOnly = true) => {
+        const track = document.getElementById(carouselId);
+        const dotsWrap = document.getElementById(dotsId);
+        if (!(track instanceof HTMLElement) || !(dotsWrap instanceof HTMLElement)) return;
+        if (mobileOnly && !isMobile) return;
+
+        const slides = Array.from(track.children).filter((el): el is HTMLElement => el instanceof HTMLElement);
+        if (slides.length <= 1) return;
+
+        dotsWrap.innerHTML = slides
+          .map(
+            (_, i) =>
+              `<button type="button" class="carousel-dot" aria-label="Go to slide ${i + 1}" aria-current="${i === 0}"></button>`,
+          )
+          .join('');
+
+        const dots = Array.from(dotsWrap.querySelectorAll<HTMLButtonElement>('.carousel-dot'));
+
+        const setActiveDot = (index: number) => {
+          dots.forEach((dot, i) => {
+            dot.setAttribute('aria-current', i === index ? 'true' : 'false');
+          });
+        };
+
+        dots.forEach((dot, i) => {
+          dot.addEventListener('click', () => {
+            const target = slides[i];
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            track.scrollTo({
+              left: target.offsetLeft - track.offsetLeft,
+              behavior: prefersReducedMotion ? 'auto' : 'smooth',
+            });
+            setActiveDot(i);
+          });
+        });
+
+        track.addEventListener('scroll', () => {
+          const trackCenter = track.scrollLeft + track.clientWidth / 2;
+          let activeIndex = 0;
+          let closest = Infinity;
+          slides.forEach((slide, i) => {
+            const slideCenter = slide.offsetLeft - track.offsetLeft + slide.clientWidth / 2;
+            const distance = Math.abs(slideCenter - trackCenter);
+            if (distance < closest) {
+              closest = distance;
+              activeIndex = i;
+            }
+          });
+          setActiveDot(activeIndex);
+        });
+      };
+
+      setupCarouselDots('spaces-carousel', 'spaces-dots');
+      setupCarouselDots('amenities-carousel', 'amenities-dots');
+      setupCarouselDots('testimonials-carousel', 'testimonials-dots', false);
 
       const setStatus = (text: string, isError = false) => {
         if (!(status instanceof HTMLElement)) return;

@@ -70,7 +70,7 @@ p {
 .hero-title {
   color: var(--color-brand);
   font-family: 'Fraunces', Georgia, serif;
-  font-size: clamp(2.6rem, 7vw, 5rem);
+  font-size: clamp(3.2rem, 8.6vw, 6.1rem);
   font-weight: 300;
   line-height: 1.1;
   text-align: center;
@@ -79,7 +79,7 @@ p {
 .quote-title {
   color: var(--color-brand);
   font-family: 'Fraunces', Georgia, serif;
-  font-size: clamp(2.2rem, 5.6vw, 4rem);
+  font-size: clamp(1.9rem, 5.2vw, 4rem);
   font-style: italic;
   font-weight: 300;
   line-height: 1.25;
@@ -144,6 +144,7 @@ p {
 
 .pill-button {
   border-radius: 999px;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -159,8 +160,92 @@ p {
   transform: translateY(-1px);
 }
 
+.pill-button:disabled {
+  cursor: not-allowed;
+}
+
 .soft-card {
   border-radius: 16px;
+}
+
+.mobile-carousel {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  margin-inline: calc(clamp(1.25rem, 6vw, 9rem) * -1);
+  padding-inline: clamp(1.25rem, 6vw, 9rem);
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: clamp(1.25rem, 6vw, 9rem);
+  scrollbar-width: none;
+}
+
+.mobile-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-carousel-slide {
+  min-width: 85%;
+  scroll-snap-align: start;
+}
+
+.testimonial-carousel {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.testimonial-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.testimonial-slide {
+  min-width: 100%;
+  scroll-snap-align: start;
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.carousel-dot {
+  background: rgb(0 0 0 / 0.2);
+  border: 0;
+  border-radius: 999px;
+  height: 0.5rem;
+  width: 0.5rem;
+}
+
+.carousel-dot[aria-current='true'] {
+  background: var(--color-brand);
+}
+
+@media (min-width: 768px) {
+  .mobile-carousel {
+    display: grid;
+    gap: 1.5rem;
+    margin-inline: 0;
+    overflow: visible;
+    padding-inline: 0;
+    padding-bottom: 0;
+    scroll-padding-inline: 0;
+    scroll-snap-type: none;
+  }
+
+  .mobile-carousel-slide {
+    min-width: 0;
+    scroll-snap-align: unset;
+  }
+
+  .mobile-carousel + .carousel-dots {
+    display: none;
+  }
 }
 
 .sr-only {
