@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import '../styles/global.css';
 import logoMark from '../assets/logo-mark.svg';
 import heroImage from '../assets/hero.jpg';
+import ogImage from '../assets/og-image.jpg';
 import mapImage from '../assets/map.png';
 import weddingsImage from '../assets/space-weddings.jpg';
 import corporateImage from '../assets/space-corporate.jpg';
@@ -19,7 +20,7 @@ const pageTitle = `${venueName} | Event Venue in Belleville, ON`;
 const pageDescription =
   `${venueName} hosts unforgettable weddings, corporate galas, and private celebrations in Belleville, Ontario.`;
 const canonicalUrl = `${siteUrl}/`;
-const ogImageUrl = new URL(heroImage.src, siteUrl).toString();
+const ogImageUrl = new URL(ogImage.src, siteUrl).toString();
 
 const spaces = [
   {
