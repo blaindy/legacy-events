@@ -1,0 +1,306 @@
+---
+import '../styles/global.css';
+
+const venueName = 'Legacy Events';
+const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content={`${venueName} hosts unforgettable weddings, galas, and private celebrations in a refined event setting.`}
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{venueName} | Event Venue</title>
+  </head>
+  <body>
+    <main>
+      <section class="relative isolate min-h-[82vh] overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=2000&q=80"
+          alt="Decorated ballroom prepared for an evening event"
+          class="absolute inset-0 h-full w-full object-cover"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-black/45 via-black/30 to-black/65"></div>
+
+        <div class="section-shell relative flex min-h-[82vh] flex-col items-center justify-center text-center">
+          <p class="mb-6 rounded-full border border-white/40 bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.24em] text-stone-100">
+            {venueName}
+          </p>
+          <h1 class="max-w-4xl text-4xl font-bold leading-tight text-stone-50 md:text-6xl">
+            Where Your Story Becomes a Legacy
+          </h1>
+          <a
+            href="#contact"
+            class="focus-ring mt-9 inline-flex rounded-full bg-[color:var(--color-accent)] px-8 py-3 text-base font-semibold text-stone-950 transition hover:brightness-95"
+            aria-label="Book a venue tour"
+          >
+            Book a Tour
+          </a>
+        </div>
+      </section>
+
+      <section class="section-shell py-20">
+        <div class="mb-10 flex items-end justify-between gap-4">
+          <div>
+            <p class="text-xs uppercase tracking-[0.2em] text-[color:var(--color-muted)]">Our Spaces</p>
+            <h2 class="mt-2 text-3xl font-semibold md:text-4xl">Host Every Milestone Beautifully</h2>
+          </div>
+        </div>
+        <div class="grid gap-6 md:grid-cols-3">
+          {
+            [
+              {
+                title: 'Weddings',
+                text: 'Romantic ballroom layouts, curated timelines, and personalized setup for ceremonies and receptions.',
+              },
+              {
+                title: 'Corporate Galas',
+                text: 'Professional staging with premium lighting and seamless service for awards, launches, and fundraisers.',
+              },
+              {
+                title: 'Private Parties',
+                text: 'From anniversaries to milestone birthdays, celebrate with flexible spaces designed for elegant gatherings.',
+              },
+            ].map((space) => (
+              <article class="card-surface p-7">
+                <h3 class="text-2xl font-semibold">{space.title}</h3>
+                <p class="mt-3 leading-relaxed text-[color:var(--color-muted)]">{space.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="bg-[color:var(--color-bg-soft)] py-20">
+        <div class="section-shell">
+          <p class="text-xs uppercase tracking-[0.2em] text-[color:var(--color-muted)]">Amenities</p>
+          <h2 class="mt-2 text-3xl font-semibold md:text-4xl">Everything You Need, In One Venue</h2>
+
+          <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {
+              [
+                {
+                  name: 'In-house Catering',
+                  icon: (
+                    <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                      <path d="M5 3v8m3-8v8M4 7h5M14 3v7m0 0c0 1.7-1.3 3-3 3h6c-1.7 0-3-1.3-3-3Zm0 0v11" />
+                    </svg>
+                  ),
+                },
+                {
+                  name: 'AV Equipment',
+                  icon: (
+                    <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                      <rect x="3" y="5" width="18" height="12" rx="2" />
+                      <path d="M8 21h8M12 17v4" />
+                    </svg>
+                  ),
+                },
+                {
+                  name: 'Bridal Suite',
+                  icon: (
+                    <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                      <path d="M12 3v18M3 12h18" />
+                      <path d="M5 5l14 14M19 5 5 19" />
+                    </svg>
+                  ),
+                },
+                {
+                  name: 'Valet Parking',
+                  icon: (
+                    <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                      <path d="M4 14l2-6h12l2 6" />
+                      <path d="M5 14h14v4H5z" />
+                      <circle cx="8" cy="18" r="1.5" />
+                      <circle cx="16" cy="18" r="1.5" />
+                    </svg>
+                  ),
+                },
+              ].map((amenity) => (
+                <article class="card-surface p-6">
+                  <div class="inline-flex rounded-full bg-stone-900/90 p-3 text-[color:var(--color-bg)]">{amenity.icon}</div>
+                  <h3 class="mt-4 text-xl font-semibold">{amenity.name}</h3>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="section-shell py-20 text-center">
+        <div class="gold-divider"></div>
+        <blockquote class="mx-auto mt-8 max-w-3xl text-2xl italic leading-relaxed text-[color:var(--color-muted)] md:text-3xl">
+          "Our gala at {venueName} was effortless from planning to final toast. The team delivered grace, precision, and unforgettable ambiance."
+        </blockquote>
+      </section>
+    </main>
+
+    <footer id="contact" class="bg-stone-900 py-16 text-stone-100">
+      <div class="section-shell grid gap-10 lg:grid-cols-3">
+        <section>
+          <h2 class="text-2xl font-semibold">Contact Us</h2>
+          <p class="mt-2 text-sm text-stone-300">
+            Share your event details and we will contact you within one business day.
+          </p>
+
+          <form id="contact-form" class="mt-6 space-y-4" method="POST" action="https://api.web3forms.com/submit" novalidate>
+            <input type="hidden" name="access_key" value={web3formsKey} />
+            <input type="hidden" name="subject" value={`New inquiry from ${venueName} website`} />
+            <input type="hidden" name="from_name" value={venueName} />
+
+            <div>
+              <label for="name" class="mb-1 block text-sm font-medium">Name</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                class="focus-ring w-full rounded-lg border border-stone-600 bg-stone-800 px-3 py-2 text-stone-100 placeholder:text-stone-400"
+                placeholder="Your full name"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="mb-1 block text-sm font-medium">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                class="focus-ring w-full rounded-lg border border-stone-600 bg-stone-800 px-3 py-2 text-stone-100 placeholder:text-stone-400"
+                placeholder="name@example.com"
+              />
+            </div>
+
+            <div>
+              <label for="message" class="mb-1 block text-sm font-medium">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                required
+                class="focus-ring w-full rounded-lg border border-stone-600 bg-stone-800 px-3 py-2 text-stone-100 placeholder:text-stone-400"
+                placeholder="Tell us about your event date, guest count, and vision."
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="focus-ring rounded-full bg-[color:var(--color-accent)] px-6 py-2.5 font-semibold text-stone-900 transition hover:brightness-95"
+            >
+              Send Inquiry
+            </button>
+
+            <p id="form-status" class="min-h-[1.25rem] text-sm text-stone-300" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section class="card-surface border-stone-700 bg-stone-800 p-6 lg:col-span-1">
+          <h2 class="text-2xl font-semibold text-stone-100">Visit Us</h2>
+          <p class="mt-2 text-sm text-stone-300">1240 Heritage Avenue, Toronto, ON</p>
+          <div class="mt-5 aspect-[4/3] rounded-xl border border-dashed border-stone-500 bg-gradient-to-br from-stone-700 to-stone-800 p-4">
+            <p class="text-sm text-stone-300">Map integration placeholder</p>
+            <p class="mt-2 text-xs text-stone-400">Embed Google Maps or OpenStreetMap iframe here in a future update.</p>
+          </div>
+          <p class="mt-4 text-sm text-stone-300">+1 (416) 555-0148</p>
+          <p class="text-sm text-stone-300">events@legacyevents.com</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-semibold">Follow</h2>
+          <ul class="mt-4 space-y-3 text-stone-300">
+            <li>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" class="focus-ring inline-block rounded-sm underline-offset-4 hover:underline">
+                Instagram
+              </a>
+            </li>
+            <li>
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" class="focus-ring inline-block rounded-sm underline-offset-4 hover:underline">
+                Facebook
+              </a>
+            </li>
+            <li>
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="focus-ring inline-block rounded-sm underline-offset-4 hover:underline">
+                LinkedIn
+              </a>
+            </li>
+          </ul>
+
+          <p class="mt-8 text-sm text-stone-400">© {new Date().getFullYear()} {venueName}. All rights reserved.</p>
+        </section>
+      </div>
+    </footer>
+
+    <script>
+      const form = document.getElementById('contact-form');
+      const status = document.getElementById('form-status');
+
+      const setStatus = (text: string, isError = false) => {
+        if (!(status instanceof HTMLElement)) return;
+        status.textContent = text;
+        status.classList.toggle('text-red-300', isError);
+        status.classList.toggle('text-emerald-300', !isError);
+      };
+
+      if (form instanceof HTMLFormElement) {
+        form.addEventListener('submit', async (event) => {
+          event.preventDefault();
+
+          if (!form.reportValidity()) {
+            setStatus('Please complete all required fields.', true);
+            return;
+          }
+
+          const accessKey = form.querySelector<HTMLInputElement>('input[name="access_key"]');
+          if (!accessKey || !accessKey.value) {
+            setStatus('Missing Web3Forms key. Set PUBLIC_WEB3FORMS_ACCESS_KEY in your environment.', true);
+            return;
+          }
+
+          const submitButton = form.querySelector('button[type="submit"]');
+          if (submitButton instanceof HTMLButtonElement) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+          }
+
+          try {
+            const payload = new FormData(form);
+            const response = await fetch(form.action, {
+              method: 'POST',
+              body: payload,
+            });
+
+            const result = await response.json();
+            if (result.success) {
+              form.reset();
+              setStatus('Thanks. Your inquiry has been sent. We will be in touch shortly.');
+            } else {
+              setStatus(result.message || 'Submission failed. Please try again.', true);
+            }
+          } catch {
+            setStatus('Network error. Please try again in a moment.', true);
+          } finally {
+            if (submitButton instanceof HTMLButtonElement) {
+              submitButton.disabled = false;
+              submitButton.textContent = 'Send Inquiry';
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

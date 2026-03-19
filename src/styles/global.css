@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+:root {
+  --color-bg: #f5f3ee;
+  --color-bg-soft: #ece9e2;
+  --color-text: #27231d;
+  --color-muted: #60584f;
+  --color-accent: #b48a3b;
+  --color-card: #fdfcf9;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
+  color: var(--color-text);
+  background: radial-gradient(circle at top right, #f9f6ef 0%, var(--color-bg) 38%, #e9e6de 100%);
+}
+
+p,
+a,
+button,
+input,
+textarea,
+label,
+span {
+  font-family: 'Manrope', 'Avenir Next', 'Segoe UI', sans-serif;
+}
+
+.section-shell {
+  @apply mx-auto w-full max-w-6xl px-6 md:px-10;
+}
+
+.card-surface {
+  @apply rounded-2xl border border-stone-300/70 bg-[color:var(--color-card)] shadow-sm;
+}
+
+.gold-divider {
+  height: 3px;
+  width: 96px;
+  border-radius: 999px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, #8f6f2e 0%, #d4b06d 50%, #8f6f2e 100%);
+}
+
+.focus-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-bg)];
+}
