@@ -15,7 +15,7 @@ import valetIcon from '../assets/amenity-valet.svg';
 
 const venueName = 'Legacy Events';
 const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
-const siteUrl = 'https://legacy-events-kappa.vercel.app';
+const siteUrl = (import.meta.env.SITE ?? 'https://legacy-events-belleville.vercel.app').replace(/\/$/, '');
 const pageTitle = `${venueName} | Event Venue in Belleville, ON`;
 const pageDescription =
   `${venueName} hosts unforgettable weddings, corporate galas, and private celebrations in Belleville, Ontario.`;
