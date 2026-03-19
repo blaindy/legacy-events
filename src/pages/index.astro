@@ -180,7 +180,7 @@ const structuredData = JSON.stringify({
                   class="h-[220px] w-full rounded-lg object-cover md:h-[286px]"
                   loading="lazy"
                 />
-                <h3 class="text-2xl font-[400] leading-8 text-[color:var(--color-heading)]">{space.title}</h3>
+                <h3 class="card-heading text-2xl leading-8">{space.title}</h3>
                 <p class="body-copy">{space.text}</p>
               </article>
             ))
@@ -202,7 +202,7 @@ const structuredData = JSON.stringify({
                   <div class="inline-flex w-fit rounded-full bg-[color:var(--color-brand)] p-3">
                     <Image src={amenity.icon} alt="" width={32} height={32} class="h-8 w-8" loading="lazy" aria-hidden="true" />
                   </div>
-                  <h3 class="text-[20px] font-[400] leading-7 text-[color:var(--color-heading)]">{amenity.name}</h3>
+                  <h3 class="card-heading text-[20px] leading-7">{amenity.name}</h3>
                   <p class="body-copy">{amenity.text}</p>
                 </article>
               ))
