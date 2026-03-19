@@ -43,20 +43,34 @@ The form posts to `https://api.web3forms.com/submit` and reads the access key fr
 
 If the env var is missing, the form shows an inline error message and does not submit.
 
-## Deploy to GitHub + Vercel
+## Vercel Deployment Flow (GitHub Actions)
 
-1. Initialize and push to GitHub:
+This repo includes `.github/workflows/vercel-deploy.yml` with:
+
+- Preview deploys on pull requests to `main` (same-repo PRs)
+- Production deploys on pushes to `main`
+
+### One-time setup
+
+1. Link this repo to a Vercel project once locally:
    ```bash
-   git add .
-   git commit -m "Build Astro landing page"
-   git branch -M main
-   git remote add origin <your-github-repo-url>
-   git push -u origin main
+   npx vercel link
    ```
-2. In Vercel, import the GitHub repository.
-3. Add environment variable in Vercel project settings:
-   - `PUBLIC_WEB3FORMS_ACCESS_KEY` = your Web3Forms key
-4. Deploy.
+2. Get IDs for GitHub secrets:
+   ```bash
+   cat .vercel/project.json
+   ```
+   Use `orgId` and `projectId` values.
+3. Create a Vercel personal token:
+   - Vercel Dashboard -> Settings -> Tokens
+4. Add these GitHub repository secrets:
+   - `VERCEL_TOKEN`
+   - `VERCEL_ORG_ID`
+   - `VERCEL_PROJECT_ID`
+5. Ensure Vercel project environment variable is set:
+   - `PUBLIC_WEB3FORMS_ACCESS_KEY`
+
+After this, each push to `main` auto-deploys production, and PRs get preview deploys.
 
 ## Notes
 
