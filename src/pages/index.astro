@@ -40,25 +40,26 @@ const spaces = [
   },
 ];
 
-const amenityCopy =
-  'Romantic ballroom layouts, curated timelines, and personalized setup for ceremonies and receptions.';
-
 const amenities = [
   {
     name: 'In-house Catering',
     icon: cateringIcon,
+    text: 'Seasonal menus, chef-led tastings, and polished table service tailored for every celebration style.',
   },
   {
     name: 'AV Equipment',
     icon: avIcon,
+    text: 'Premium sound, discreet lighting, and seamless presentations managed by experts throughout your event.',
   },
   {
     name: 'Bridal Suite',
     icon: bridalIcon,
+    text: 'Private prep spaces, calming details, and elegant mirrors designed for memorable wedding moments.',
   },
   {
     name: 'Valet Parking',
     icon: valetIcon,
+    text: 'Welcoming arrivals, efficient routing, and attentive attendants ensuring smooth guest access all evening.',
   },
 ];
 
@@ -202,7 +203,7 @@ const structuredData = JSON.stringify({
                     <Image src={amenity.icon} alt="" width={32} height={32} class="h-8 w-8" loading="lazy" aria-hidden="true" />
                   </div>
                   <h3 class="text-[20px] font-[400] leading-7 text-[color:var(--color-heading)]">{amenity.name}</h3>
-                  <p class="body-copy">{amenityCopy}</p>
+                  <p class="body-copy">{amenity.text}</p>
                 </article>
               ))
             }
