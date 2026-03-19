@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://legacy-events-kappa.vercel.app/sitemap.xml
+Sitemap: https://legacy-events-belleville.vercel.app/sitemap.xml

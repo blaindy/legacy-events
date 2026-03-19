@@ -127,13 +127,13 @@ const structuredData = JSON.stringify({
       <section aria-labelledby="hero-heading" class="container-shell flex flex-col items-center pt-12 md:pt-20">
         <div class="flex w-full max-w-[377px] flex-col items-center gap-5">
           <Image src={logoMark} alt="" aria-hidden="true" width={71} height={72} class="h-[72px] w-[71px]" loading="eager" />
-          <p class="font-['Fraunces'] font-[300] text-[20px] tracking-[3px] text-[color:var(--color-brand)]">LEGACY EVENTS</p>
+          <p class="font-['Fraunces'] font-[300] text-[20px] tracking-[3px] text-[color:var(--color-brand)]">Legacy Events</p>
         </div>
 
         <div class="flex w-full max-w-[1152px] flex-col items-center justify-center gap-12 px-0 py-16 md:py-20">
-          <h1 id="hero-heading" class="hero-title">Where your story<br />becomes a Legacy.</h1>
+          <h1 id="hero-heading" class="hero-title">Where your story<br />becomes a legacy.</h1>
           <a href="#contact" class="pill-button focus-ring bg-[color:var(--color-brand)] px-8 py-3 text-white" aria-label="Get in touch with Legacy Events">
-            Get in Touch
+            Get in touch
           </a>
         </div>
       </section>
@@ -159,8 +159,8 @@ const structuredData = JSON.stringify({
       <section aria-labelledby="spaces-heading" class="container-shell py-16 md:py-20">
         <div class="mb-10 flex w-full items-end">
           <div class="flex w-full max-w-[579px] flex-col gap-2">
-            <p class="eyebrow">Our Spaces</p>
-            <h2 id="spaces-heading" class="section-title">Host Every Milestone Beautifully</h2>
+            <p class="eyebrow">Our spaces</p>
+            <h2 id="spaces-heading" class="section-title">Host every milestone beautifully</h2>
           </div>
         </div>
 
@@ -192,7 +192,7 @@ const structuredData = JSON.stringify({
         <div class="container-shell">
           <div class="flex w-full max-w-[1152px] flex-col gap-2">
             <p class="eyebrow">Amenities</p>
-            <h2 id="amenities-heading" class="section-title">Everything You Need, In One Venue</h2>
+            <h2 id="amenities-heading" class="section-title">Everything you need, in one venue</h2>
           </div>
 
           <div class="mt-8 grid gap-6 lg:grid-cols-4">
@@ -227,7 +227,7 @@ const structuredData = JSON.stringify({
       <div class="container-shell">
         <div class="grid gap-8 lg:grid-cols-2">
           <section aria-labelledby="contact-heading">
-            <h2 id="contact-heading" class="text-2xl font-[400] leading-8 text-[color:var(--color-footer-light)]">Contact Us</h2>
+            <h2 id="contact-heading" class="footer-heading">Contact us</h2>
             <p id="contact-intro" class="mt-2 text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
               Share your event details and we will contact you within one business day.
             </p>
@@ -238,39 +238,39 @@ const structuredData = JSON.stringify({
               <input type="hidden" name="from_name" value={venueName} />
 
               <div>
-                <label for="name" class="mb-1 block text-sm font-normal leading-5 text-[color:var(--color-footer-light)]">Name</label>
+                <label for="name" class="form-label">Name</label>
                 <input
                   id="name"
                   name="name"
                   type="text"
                   autocomplete="name"
                   required
-                  class="focus-ring w-full rounded-lg border border-white/20 bg-white px-3 py-[9px] text-[16px] leading-[26px] text-[color:var(--color-heading)] placeholder:text-[color:var(--color-placeholder)]"
+                  class="form-control focus-ring"
                   placeholder="Your full name"
                 />
               </div>
 
               <div>
-                <label for="email" class="mb-1 block text-sm font-normal leading-5 text-[color:var(--color-footer-light)]">Email</label>
+                <label for="email" class="form-label">Email</label>
                 <input
                   id="email"
                   name="email"
                   type="email"
                   autocomplete="email"
                   required
-                  class="focus-ring w-full rounded-lg border border-white/20 bg-white px-3 py-[9px] text-[16px] leading-[26px] text-[color:var(--color-heading)] placeholder:text-[color:var(--color-placeholder)]"
+                  class="form-control focus-ring"
                   placeholder="name@example.com"
                 />
               </div>
 
               <div>
-                <label for="message" class="mb-1 block text-sm font-normal leading-5 text-[color:var(--color-footer-light)]">Message</label>
+                <label for="message" class="form-label">Message</label>
                 <textarea
                   id="message"
                   name="message"
                   rows="4"
                   required
-                  class="focus-ring w-full rounded-lg border border-white/20 bg-white px-3 py-2 text-[16px] leading-[26px] text-[color:var(--color-heading)] placeholder:text-[color:var(--color-placeholder)]"
+                  class="form-control focus-ring"
                   placeholder="Tell us about your event date, guest count, and vision."
                 ></textarea>
               </div>
@@ -318,16 +318,16 @@ const structuredData = JSON.stringify({
 
             <div class="grid gap-8 md:grid-cols-2">
               <div>
-                <h2 class="text-2xl font-[400] leading-8 text-white">Visit Us</h2>
-                <p class="mt-2 text-sm leading-5 text-[color:var(--color-footer-subtle)]">1240 Dundas St E, Belleville, ON</p>
-                <p class="mt-4 text-sm leading-5 text-[color:var(--color-footer-subtle)]"><a class="focus-ring rounded-sm underline-offset-4 hover:underline" href="tel:+16135550148">+1 (613) 555-0148</a></p>
-                <p class="text-sm leading-5 text-[color:var(--color-footer-subtle)]"><a class="focus-ring rounded-sm underline-offset-4 hover:underline" href="mailto:events@legacyevents.com">events@legacyevents.com</a></p>
+                <h2 class="footer-heading text-white">Visit us</h2>
+                <p class="footer-copy mt-2">1240 Dundas St E, Belleville, ON</p>
+                <p class="footer-copy mt-4"><a class="focus-ring rounded-sm underline-offset-4 hover:underline" href="tel:+16135550148">+1 (613) 555-0148</a></p>
+                <p class="footer-copy"><a class="focus-ring rounded-sm underline-offset-4 hover:underline" href="mailto:events@legacyevents.com">events@legacyevents.com</a></p>
               </div>
 
               <div>
-                <h2 class="text-2xl font-[400] leading-8 text-white">Follow</h2>
+                <h2 class="footer-heading text-white">Follow</h2>
                 <nav aria-label="Legacy Events social media">
-                <ul class="mt-2 space-y-2 text-sm leading-5 text-[color:var(--color-footer-subtle)]">
+                <ul class="footer-copy mt-2 space-y-2">
                   <li>
                     <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in a new tab)" class="focus-ring rounded-sm underline-offset-4 hover:underline">Instagram</a>
                   </li>
@@ -344,7 +344,7 @@ const structuredData = JSON.stringify({
           </section>
         </div>
 
-        <p class="mt-10 text-sm leading-5 text-[color:var(--color-footer-subtle)]">© 2026 Legacy Events. All rights reserved.</p>
+        <p class="footer-copy mt-10">© 2026 Legacy Events. All rights reserved.</p>
       </div>
     </footer>
 
