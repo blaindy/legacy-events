@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import '../styles/global.css';
 
 const venueName = 'Legacy Events';
@@ -108,7 +109,7 @@ const structuredData = JSON.stringify({
     <main id="main-content">
       <section aria-labelledby="hero-heading" class="container-shell flex flex-col items-center pt-12 md:pt-20">
         <div class="flex w-full max-w-[377px] flex-col items-center gap-5">
-          <img src={logoMark} alt="" aria-hidden="true" class="h-[72px] w-[71px]" loading="eager" decoding="async" />
+          <Image src={logoMark} alt="" aria-hidden="true" width={71} height={72} class="h-[72px] w-[71px]" loading="eager" />
           <p class="font-['Fraunces'] font-[300] text-[20px] tracking-[3px] text-[color:var(--color-brand)]">LEGACY EVENTS</p>
         </div>
 
@@ -121,7 +122,7 @@ const structuredData = JSON.stringify({
       </section>
 
       <section class="relative h-[390px] w-full overflow-hidden md:h-[550px]">
-        <img src={heroImage} alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async" fetchpriority="high" />
+        <Image src={heroImage} alt="" aria-hidden="true" width={1920} height={550} class="absolute inset-0 h-full w-full object-cover" loading="eager" fetchpriority="high" />
         <div class="absolute inset-0 bg-gradient-to-b from-white/100 from-[6.5%] to-transparent to-[55.5%]"></div>
       </section>
 
@@ -137,7 +138,7 @@ const structuredData = JSON.stringify({
           {
             spaces.map((space) => (
               <article class="soft-card bg-[color:var(--color-space-card)] p-7">
-                <img src={space.image} alt={`${space.title} event setup at ${venueName}`} class="h-[220px] w-full rounded-lg object-cover md:h-[286px]" loading="lazy" decoding="async" />
+                <Image src={space.image} alt={`${space.title} event setup at ${venueName}`} width={465} height={286} class="h-[220px] w-full rounded-lg object-cover md:h-[286px]" loading="lazy" />
                 <h3 class="mt-3 text-2xl font-[400] leading-8 text-[color:var(--color-heading)]">{space.title}</h3>
                 <p class="body-copy mt-3">{space.text}</p>
               </article>
@@ -158,7 +159,7 @@ const structuredData = JSON.stringify({
               amenities.map((amenity) => (
                 <article class="soft-card flex h-full flex-col gap-4 self-stretch bg-[color:var(--color-amenity-card)] p-[25px]">
                   <div class="inline-flex w-fit rounded-full bg-[color:var(--color-brand)] p-3">
-                    <img src={amenity.icon} alt="" class="h-8 w-8" loading="lazy" decoding="async" aria-hidden="true" />
+                    <Image src={amenity.icon} alt="" width={32} height={32} class="h-8 w-8" loading="lazy" aria-hidden="true" />
                   </div>
                   <h3 class="text-[20px] font-[400] leading-7 text-[color:var(--color-heading)]">{amenity.name}</h3>
                   <p class="body-copy">{amenityCopy}</p>
@@ -242,11 +243,25 @@ const structuredData = JSON.stringify({
 
               <p id="form-status" class="min-h-[1.25rem] text-sm text-[color:var(--color-footer-light)]" role="status" aria-live="polite"></p>
             </form>
+
+            <div
+              id="form-success-panel"
+              class="mt-6 hidden rounded-2xl bg-white/10 p-6 text-[color:var(--color-footer-light)]"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+              tabindex="-1"
+            >
+              <h3 class="text-xl font-[400] leading-7">Inquiry sent</h3>
+              <p class="mt-2 text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
+                Thank you for reaching out. We will contact you within one business day.
+              </p>
+            </div>
           </section>
 
           <section class="flex flex-col gap-8">
             <div class="soft-card overflow-hidden border border-white/20">
-              <img src={mapImage} alt="Map of Legacy Events location" class="h-[240px] w-full object-cover" loading="lazy" decoding="async" />
+              <Image src={mapImage} alt="Map of Legacy Events location" width={556} height={240} class="h-[240px] w-full object-cover" loading="lazy" />
             </div>
 
             <div class="grid gap-8 md:grid-cols-2">
@@ -284,6 +299,7 @@ const structuredData = JSON.stringify({
     <script>
       const form = document.getElementById('contact-form');
       const status = document.getElementById('form-status');
+      const successPanel = document.getElementById('form-success-panel');
 
       const setStatus = (text: string, isError = false) => {
         if (!(status instanceof HTMLElement)) return;
@@ -323,7 +339,12 @@ const structuredData = JSON.stringify({
             const result = await response.json();
             if (result.success) {
               form.reset();
-              setStatus('Thanks. Your inquiry has been sent. We will be in touch shortly.');
+              form.classList.add('hidden');
+              setStatus('');
+              if (successPanel instanceof HTMLElement) {
+                successPanel.classList.remove('hidden');
+                successPanel.focus();
+              }
             } else {
               setStatus(result.message || 'Submission failed. Please try again.', true);
             }
