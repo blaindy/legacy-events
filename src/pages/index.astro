@@ -11,14 +11,17 @@ const mapImage = '/assets/map.png';
 const spaces = [
   {
     title: 'Weddings',
+    image: '/assets/space-weddings.png',
     text: 'Romantic ballroom layouts, curated timelines, and personalized setup for ceremonies and receptions.',
   },
   {
     title: 'Corporate Galas',
+    image: '/assets/space-corporate.png',
     text: 'Professional staging with premium lighting and seamless service for awards, launches, and fundraisers.',
   },
   {
     title: 'Private Parties',
+    image: '/assets/space-private.png',
     text: 'From anniversaries to milestone birthdays, celebrate with flexible spaces designed for elegant gatherings.',
   },
 ];
@@ -49,8 +52,7 @@ const amenities = [
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta
@@ -98,7 +100,7 @@ const amenities = [
           {
             spaces.map((space) => (
               <article class="soft-card bg-[color:var(--color-space-card)] p-7">
-                <img src={heroImage} alt="Decorated ballroom prepared for an evening event" class="h-[220px] w-full rounded-lg object-cover md:h-[286px]" loading="lazy" decoding="async" />
+                <img src={space.image} alt={space.title} class="h-[220px] w-full rounded-lg object-cover md:h-[286px]" loading="lazy" decoding="async" />
                 <h3 class="mt-3 text-2xl font-[400] leading-8 text-[color:var(--color-heading)]">{space.title}</h3>
                 <p class="body-copy mt-3">{space.text}</p>
               </article>
@@ -117,7 +119,7 @@ const amenities = [
           <div class="mt-8 grid gap-6 lg:grid-cols-4">
             {
               amenities.map((amenity) => (
-                <article class="soft-card flex h-full flex-col gap-4 self-stretch border border-[color:var(--color-border-soft)] bg-[color:var(--color-amenity-card)] p-[25px]">
+                <article class="soft-card flex h-full flex-col gap-4 self-stretch bg-[color:var(--color-amenity-card)] p-[25px]">
                   <div class="inline-flex w-fit rounded-full bg-[color:var(--color-brand)] p-3">
                     <img src={amenity.icon} alt="" class="h-8 w-8" loading="lazy" decoding="async" aria-hidden="true" />
                   </div>
