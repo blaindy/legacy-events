@@ -19,7 +19,7 @@ const pageTitle = `${venueName} | Event Venue in Belleville, ON`;
 const pageDescription =
   `${venueName} hosts unforgettable weddings, corporate galas, and private celebrations in Belleville, Ontario.`;
 const canonicalUrl = `${siteUrl}/`;
-const ogImagePath = '/assets/hero.jpg';
+const ogImageUrl = new URL(heroImage.src, siteUrl).toString();
 
 const spaces = [
   {
@@ -66,7 +66,7 @@ const structuredData = JSON.stringify({
   '@type': 'EventVenue',
   name: venueName,
   url: siteUrl,
-  image: `${siteUrl}${ogImagePath}`,
+  image: ogImageUrl,
   telephone: '+1-613-555-0148',
   email: 'events@legacyevents.com',
     address: {
@@ -103,12 +103,12 @@ const structuredData = JSON.stringify({
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={`${siteUrl}${ogImagePath}`} />
+    <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:alt" content="Elegant event ballroom at Legacy Events" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
-    <meta name="twitter:image" content={`${siteUrl}${ogImagePath}`} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content="Elegant event ballroom at Legacy Events" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -165,7 +165,7 @@ const structuredData = JSON.stringify({
         <div class="grid gap-6 lg:grid-cols-3">
           {
             spaces.map((space) => (
-              <article class="soft-card bg-[color:var(--color-space-card)] p-7">
+              <article class="soft-card flex h-full flex-col gap-4 bg-[color:var(--color-space-card)] p-[25px]">
                 <Image
                   src={space.image}
                   alt={`${space.title} event setup at ${venueName}`}
@@ -178,8 +178,8 @@ const structuredData = JSON.stringify({
                   class="h-[220px] w-full rounded-lg object-cover md:h-[286px]"
                   loading="lazy"
                 />
-                <h3 class="mt-3 text-2xl font-[400] leading-8 text-[color:var(--color-heading)]">{space.title}</h3>
-                <p class="body-copy mt-3">{space.text}</p>
+                <h3 class="text-2xl font-[400] leading-8 text-[color:var(--color-heading)]">{space.title}</h3>
+                <p class="body-copy">{space.text}</p>
               </article>
             ))
           }
