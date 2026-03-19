@@ -3,6 +3,47 @@ import '../styles/global.css';
 
 const venueName = 'Legacy Events';
 const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
+
+const heroImage = 'https://www.figma.com/api/mcp/asset/7e5abbc8-98f6-4b9c-8580-ea3c096d90d1';
+const logoMark = 'https://www.figma.com/api/mcp/asset/3fc23f5e-de9e-4ba2-8f9c-6669bbd3488d';
+const mapImage = 'https://www.figma.com/api/mcp/asset/300d1b75-0e6d-4765-a255-770b0b3f804d';
+
+const spaces = [
+  {
+    title: 'Weddings',
+    text: 'Romantic ballroom layouts, curated timelines, and personalized setup for ceremonies and receptions.',
+  },
+  {
+    title: 'Corporate Galas',
+    text: 'Professional staging with premium lighting and seamless service for awards, launches, and fundraisers.',
+  },
+  {
+    title: 'Private Parties',
+    text: 'From anniversaries to milestone birthdays, celebrate with flexible spaces designed for elegant gatherings.',
+  },
+];
+
+const amenityCopy =
+  'Romantic ballroom layouts, curated timelines, and personalized setup for ceremonies and receptions.';
+
+const amenities = [
+  {
+    name: 'In-house Catering',
+    icon: 'https://www.figma.com/api/mcp/asset/58b84504-28ea-4e41-a4af-64b092509b18',
+  },
+  {
+    name: 'AV Equipment',
+    icon: 'https://www.figma.com/api/mcp/asset/f108c77c-b104-4a39-a9bc-3563931620eb',
+  },
+  {
+    name: 'Bridal Suite',
+    icon: 'https://www.figma.com/api/mcp/asset/7e29b47c-97fb-4c1c-97f9-8ea32fddf7a5',
+  },
+  {
+    name: 'Valet Parking',
+    icon: 'https://www.figma.com/api/mcp/asset/92a26d1b-4470-4879-8742-c26294f80dbf',
+  },
+];
 ---
 
 <html lang="en">
@@ -19,121 +60,69 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Inter:opsz,wght@14..32,100..900&display=swap"
       rel="stylesheet"
     />
     <title>{venueName} | Event Venue</title>
   </head>
   <body>
     <main>
-      <section class="relative isolate min-h-[82vh] overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=2000&q=80"
-          alt="Decorated ballroom prepared for an evening event"
-          class="absolute inset-0 h-full w-full object-cover"
-          loading="eager"
-          decoding="async"
-        />
-        <div class="absolute inset-0 bg-gradient-to-b from-black/45 via-black/30 to-black/65"></div>
+      <section class="container-shell flex flex-col items-center pt-12 md:pt-20">
+        <div class="flex w-full max-w-[377px] flex-col items-center gap-5">
+          <img src={logoMark} alt="Legacy Events logo mark" class="h-[72px] w-[71px]" loading="eager" decoding="async" />
+          <p class="font-['Fraunces'] font-[300] text-[20px] tracking-[3px] text-[color:var(--color-brand)]">LEGACY EVENTS</p>
+        </div>
 
-        <div class="section-shell relative flex min-h-[82vh] flex-col items-center justify-center text-center">
-          <p class="mb-6 rounded-full border border-white/40 bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.24em] text-stone-100">
-            {venueName}
-          </p>
-          <h1 class="max-w-4xl text-4xl font-bold leading-tight text-stone-50 md:text-6xl">
-            Where Your Story Becomes a Legacy
-          </h1>
-          <a
-            href="#contact"
-            class="focus-ring mt-9 inline-flex rounded-full bg-[color:var(--color-accent)] px-8 py-3 text-base font-semibold text-stone-950 transition hover:brightness-95"
-            aria-label="Book a venue tour"
-          >
-            Book a Tour
+        <div class="flex w-full max-w-[1152px] flex-col items-center justify-center gap-12 px-0 py-16 md:py-20">
+          <h1 class="hero-title">Where your story<br />becomes a Legacy.</h1>
+          <a href="#contact" class="pill-button focus-ring bg-[color:var(--color-brand)] px-8 py-3 text-white" aria-label="Get in touch with Legacy Events">
+            Get in Touch
           </a>
         </div>
       </section>
 
-      <section class="section-shell py-20">
-        <div class="mb-10 flex items-end justify-between gap-4">
-          <div>
-            <p class="text-xs uppercase tracking-[0.2em] text-[color:var(--color-muted)]">Our Spaces</p>
-            <h2 class="mt-2 text-3xl font-semibold md:text-4xl">Host Every Milestone Beautifully</h2>
+      <section class="relative h-[390px] w-full overflow-hidden md:h-[550px]">
+        <img src={heroImage} alt="Decorated ballroom prepared for an evening event" class="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async" />
+        <div class="absolute inset-0 bg-gradient-to-b from-white/100 from-[6.5%] to-transparent to-[55.5%]"></div>
+      </section>
+
+      <section class="container-shell py-16 md:py-20">
+        <div class="mb-10 flex w-full items-end">
+          <div class="flex w-full max-w-[579px] flex-col gap-2">
+            <p class="eyebrow">Our Spaces</p>
+            <h2 class="section-title">Host Every Milestone Beautifully</h2>
           </div>
         </div>
-        <div class="grid gap-6 md:grid-cols-3">
+
+        <div class="grid gap-6 lg:grid-cols-3">
           {
-            [
-              {
-                title: 'Weddings',
-                text: 'Romantic ballroom layouts, curated timelines, and personalized setup for ceremonies and receptions.',
-              },
-              {
-                title: 'Corporate Galas',
-                text: 'Professional staging with premium lighting and seamless service for awards, launches, and fundraisers.',
-              },
-              {
-                title: 'Private Parties',
-                text: 'From anniversaries to milestone birthdays, celebrate with flexible spaces designed for elegant gatherings.',
-              },
-            ].map((space) => (
-              <article class="card-surface p-7">
-                <h3 class="text-2xl font-semibold">{space.title}</h3>
-                <p class="mt-3 leading-relaxed text-[color:var(--color-muted)]">{space.text}</p>
+            spaces.map((space) => (
+              <article class="soft-card bg-[color:var(--color-space-card)] p-7">
+                <img src={heroImage} alt="Decorated ballroom prepared for an evening event" class="h-[220px] w-full rounded-lg object-cover md:h-[286px]" loading="lazy" decoding="async" />
+                <h3 class="mt-3 text-2xl font-[400] leading-8 text-[color:var(--color-heading)]">{space.title}</h3>
+                <p class="body-copy mt-3">{space.text}</p>
               </article>
             ))
           }
         </div>
       </section>
 
-      <section class="bg-[color:var(--color-bg-soft)] py-20">
-        <div class="section-shell">
-          <p class="text-xs uppercase tracking-[0.2em] text-[color:var(--color-muted)]">Amenities</p>
-          <h2 class="mt-2 text-3xl font-semibold md:text-4xl">Everything You Need, In One Venue</h2>
+      <section class="w-full bg-[color:var(--color-amenity-bg)] py-16 md:py-20">
+        <div class="container-shell">
+          <div class="flex w-full max-w-[1152px] flex-col gap-2">
+            <p class="eyebrow">Amenities</p>
+            <h2 class="section-title">Everything You Need, In One Venue</h2>
+          </div>
 
-          <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="mt-8 grid gap-6 lg:grid-cols-4">
             {
-              [
-                {
-                  name: 'In-house Catering',
-                  icon: (
-                    <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                      <path d="M5 3v8m3-8v8M4 7h5M14 3v7m0 0c0 1.7-1.3 3-3 3h6c-1.7 0-3-1.3-3-3Zm0 0v11" />
-                    </svg>
-                  ),
-                },
-                {
-                  name: 'AV Equipment',
-                  icon: (
-                    <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                      <rect x="3" y="5" width="18" height="12" rx="2" />
-                      <path d="M8 21h8M12 17v4" />
-                    </svg>
-                  ),
-                },
-                {
-                  name: 'Bridal Suite',
-                  icon: (
-                    <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                      <path d="M12 3v18M3 12h18" />
-                      <path d="M5 5l14 14M19 5 5 19" />
-                    </svg>
-                  ),
-                },
-                {
-                  name: 'Valet Parking',
-                  icon: (
-                    <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                      <path d="M4 14l2-6h12l2 6" />
-                      <path d="M5 14h14v4H5z" />
-                      <circle cx="8" cy="18" r="1.5" />
-                      <circle cx="16" cy="18" r="1.5" />
-                    </svg>
-                  ),
-                },
-              ].map((amenity) => (
-                <article class="card-surface p-6">
-                  <div class="inline-flex rounded-full bg-stone-900/90 p-3 text-[color:var(--color-bg)]">{amenity.icon}</div>
-                  <h3 class="mt-4 text-xl font-semibold">{amenity.name}</h3>
+              amenities.map((amenity) => (
+                <article class="soft-card flex h-full flex-col gap-4 self-stretch border border-[color:var(--color-border-soft)] bg-[color:var(--color-amenity-card)] p-[25px]">
+                  <div class="inline-flex w-fit rounded-full bg-[color:var(--color-brand)] p-3">
+                    <img src={amenity.icon} alt="" class="h-8 w-8" loading="lazy" decoding="async" aria-hidden="true" />
+                  </div>
+                  <h3 class="text-[20px] font-[400] leading-7 text-[color:var(--color-heading)]">{amenity.name}</h3>
+                  <p class="body-copy">{amenityCopy}</p>
                 </article>
               ))
             }
@@ -141,107 +130,110 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
         </div>
       </section>
 
-      <section class="section-shell py-20 text-center">
-        <div class="gold-divider"></div>
-        <blockquote class="mx-auto mt-8 max-w-3xl text-2xl italic leading-relaxed text-[color:var(--color-muted)] md:text-3xl">
-          "Our gala at {venueName} was effortless from planning to final toast. The team delivered grace, precision, and unforgettable ambiance."
-        </blockquote>
+      <section class="container-shell py-16 md:py-20">
+        <div class="mx-auto flex max-w-[1100px] flex-col items-center gap-7">
+          <div class="h-[3px] w-24 rounded-full bg-[color:var(--color-amenity-bg)]"></div>
+          <blockquote class="quote-title">
+            “Our gala at Legacy Events was effortless from planning to final toast. The team delivered grace, precision, and unforgettable ambiance.”
+          </blockquote>
+          <p class="eyebrow text-[color:var(--color-muted)]">Jane Doe</p>
+        </div>
       </section>
     </main>
 
-    <footer id="contact" class="bg-stone-900 py-16 text-stone-100">
-      <div class="section-shell grid gap-10 lg:grid-cols-3">
-        <section>
-          <h2 class="text-2xl font-semibold">Contact Us</h2>
-          <p class="mt-2 text-sm text-stone-300">
-            Share your event details and we will contact you within one business day.
-          </p>
+    <footer id="contact" class="bg-[color:var(--color-brand)] py-16 text-white">
+      <div class="container-shell">
+        <div class="grid gap-8 lg:grid-cols-2">
+          <section>
+            <h2 class="text-2xl font-[400] leading-8 text-[color:var(--color-footer-light)]">Contact Us</h2>
+            <p class="mt-2 text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
+              Share your event details and we will contact you within one business day.
+            </p>
 
-          <form id="contact-form" class="mt-6 space-y-4" method="POST" action="https://api.web3forms.com/submit" novalidate>
-            <input type="hidden" name="access_key" value={web3formsKey} />
-            <input type="hidden" name="subject" value={`New inquiry from ${venueName} website`} />
-            <input type="hidden" name="from_name" value={venueName} />
+            <form id="contact-form" class="mt-6 space-y-4" method="POST" action="https://api.web3forms.com/submit" novalidate>
+              <input type="hidden" name="access_key" value={web3formsKey} />
+              <input type="hidden" name="subject" value={`New inquiry from ${venueName} website`} />
+              <input type="hidden" name="from_name" value={venueName} />
 
-            <div>
-              <label for="name" class="mb-1 block text-sm font-medium">Name</label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                class="focus-ring w-full rounded-lg border border-stone-600 bg-stone-800 px-3 py-2 text-stone-100 placeholder:text-stone-400"
-                placeholder="Your full name"
-              />
+              <div>
+                <label for="name" class="mb-1 block text-sm font-normal leading-5 text-[color:var(--color-footer-light)]">Name</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  class="focus-ring w-full rounded-lg border border-white/20 bg-white px-3 py-[9px] text-[16px] leading-[26px] text-[color:var(--color-heading)] placeholder:text-[color:var(--color-placeholder)]"
+                  placeholder="Your full name"
+                />
+              </div>
+
+              <div>
+                <label for="email" class="mb-1 block text-sm font-normal leading-5 text-[color:var(--color-footer-light)]">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  class="focus-ring w-full rounded-lg border border-white/20 bg-white px-3 py-[9px] text-[16px] leading-[26px] text-[color:var(--color-heading)] placeholder:text-[color:var(--color-placeholder)]"
+                  placeholder="name@example.com"
+                />
+              </div>
+
+              <div>
+                <label for="message" class="mb-1 block text-sm font-normal leading-5 text-[color:var(--color-footer-light)]">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  required
+                  class="focus-ring w-full rounded-lg border border-white/20 bg-white px-3 py-2 text-[16px] leading-[26px] text-[color:var(--color-heading)] placeholder:text-[color:var(--color-placeholder)]"
+                  placeholder="Tell us about your event date, guest count, and vision."
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="pill-button focus-ring rounded-[999px] bg-white px-6 py-2.5 text-[color:var(--color-submit-text)]"
+              >
+                Send Inquiry
+              </button>
+
+              <p id="form-status" class="min-h-[1.25rem] text-sm text-[color:var(--color-footer-light)]" role="status" aria-live="polite"></p>
+            </form>
+          </section>
+
+          <section class="flex flex-col gap-8">
+            <div class="soft-card overflow-hidden border border-white/20">
+              <img src={mapImage} alt="Map of Legacy Events location" class="h-[240px] w-full object-cover" loading="lazy" decoding="async" />
             </div>
 
-            <div>
-              <label for="email" class="mb-1 block text-sm font-medium">Email</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                class="focus-ring w-full rounded-lg border border-stone-600 bg-stone-800 px-3 py-2 text-stone-100 placeholder:text-stone-400"
-                placeholder="name@example.com"
-              />
+            <div class="grid gap-8 md:grid-cols-2">
+              <div>
+                <h2 class="text-2xl font-[400] leading-8 text-white">Visit Us</h2>
+                <p class="mt-2 text-sm leading-5 text-[color:var(--color-footer-subtle)]">1240 Dundas St E, Belleville, ON</p>
+                <p class="mt-4 text-sm leading-5 text-[color:var(--color-footer-subtle)]">+1 (613) 555-0148</p>
+                <p class="text-sm leading-5 text-[color:var(--color-footer-subtle)]">events@legacyevents.com</p>
+              </div>
+
+              <div>
+                <h2 class="text-2xl font-[400] leading-8 text-white">Follow</h2>
+                <ul class="mt-2 space-y-2 text-sm leading-5 text-[color:var(--color-footer-subtle)]">
+                  <li>
+                    <a href="https://instagram.com" target="_blank" rel="noreferrer" class="focus-ring rounded-sm underline-offset-4 hover:underline">Instagram</a>
+                  </li>
+                  <li>
+                    <a href="https://facebook.com" target="_blank" rel="noreferrer" class="focus-ring rounded-sm underline-offset-4 hover:underline">Facebook</a>
+                  </li>
+                  <li>
+                    <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="focus-ring rounded-sm underline-offset-4 hover:underline">LinkedIn</a>
+                  </li>
+                </ul>
+              </div>
             </div>
+          </section>
+        </div>
 
-            <div>
-              <label for="message" class="mb-1 block text-sm font-medium">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
-                required
-                class="focus-ring w-full rounded-lg border border-stone-600 bg-stone-800 px-3 py-2 text-stone-100 placeholder:text-stone-400"
-                placeholder="Tell us about your event date, guest count, and vision."
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              class="focus-ring rounded-full bg-[color:var(--color-accent)] px-6 py-2.5 font-semibold text-stone-900 transition hover:brightness-95"
-            >
-              Send Inquiry
-            </button>
-
-            <p id="form-status" class="min-h-[1.25rem] text-sm text-stone-300" role="status" aria-live="polite"></p>
-          </form>
-        </section>
-
-        <section class="card-surface border-stone-700 bg-stone-800 p-6 lg:col-span-1">
-          <h2 class="text-2xl font-semibold text-stone-100">Visit Us</h2>
-          <p class="mt-2 text-sm text-stone-300">1240 Heritage Avenue, Toronto, ON</p>
-          <div class="mt-5 aspect-[4/3] rounded-xl border border-dashed border-stone-500 bg-gradient-to-br from-stone-700 to-stone-800 p-4">
-            <p class="text-sm text-stone-300">Map integration placeholder</p>
-            <p class="mt-2 text-xs text-stone-400">Embed Google Maps or OpenStreetMap iframe here in a future update.</p>
-          </div>
-          <p class="mt-4 text-sm text-stone-300">+1 (416) 555-0148</p>
-          <p class="text-sm text-stone-300">events@legacyevents.com</p>
-        </section>
-
-        <section>
-          <h2 class="text-2xl font-semibold">Follow</h2>
-          <ul class="mt-4 space-y-3 text-stone-300">
-            <li>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" class="focus-ring inline-block rounded-sm underline-offset-4 hover:underline">
-                Instagram
-              </a>
-            </li>
-            <li>
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" class="focus-ring inline-block rounded-sm underline-offset-4 hover:underline">
-                Facebook
-              </a>
-            </li>
-            <li>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="focus-ring inline-block rounded-sm underline-offset-4 hover:underline">
-                LinkedIn
-              </a>
-            </li>
-          </ul>
-
-          <p class="mt-8 text-sm text-stone-400">© {new Date().getFullYear()} {venueName}. All rights reserved.</p>
-        </section>
+        <p class="mt-10 text-sm leading-5 text-[color:var(--color-footer-subtle)]">© 2026 Legacy Events. All rights reserved.</p>
       </div>
     </footer>
 
@@ -252,8 +244,8 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
       const setStatus = (text: string, isError = false) => {
         if (!(status instanceof HTMLElement)) return;
         status.textContent = text;
-        status.classList.toggle('text-red-300', isError);
-        status.classList.toggle('text-emerald-300', !isError);
+        status.classList.toggle('text-red-200', isError);
+        status.classList.toggle('text-[color:var(--color-footer-light)]', !isError);
       };
 
       if (form instanceof HTMLFormElement) {
