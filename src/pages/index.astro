@@ -3,6 +3,11 @@ import '../styles/global.css';
 
 const venueName = 'Legacy Events';
 const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
+const siteUrl = 'https://legacy-events-kappa.vercel.app';
+const pageTitle = `${venueName} | Event Venue in Belleville, ON`;
+const pageDescription =
+  `${venueName} hosts unforgettable weddings, corporate galas, and private celebrations in Belleville, Ontario.`;
+const canonicalUrl = `${siteUrl}/`;
 
 const heroImage = '/assets/hero.png';
 const logoMark = '/assets/logo-mark.svg';
@@ -47,36 +52,68 @@ const amenities = [
     icon: '/assets/amenity-valet.svg',
   },
 ];
+
+const structuredData = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'EventVenue',
+  name: venueName,
+  url: siteUrl,
+  image: `${siteUrl}${heroImage}`,
+  telephone: '+1-613-555-0148',
+  email: 'events@legacyevents.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '1240 Dundas St E',
+    addressLocality: 'Belleville',
+    addressRegion: 'ON',
+    addressCountry: 'CA',
+  },
+  sameAs: ['https://instagram.com', 'https://facebook.com', 'https://linkedin.com'],
+});
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="/assets/favicon.png" />
-    <meta name="viewport" content="width=device-width" />
+    <link rel="apple-touch-icon" href="/assets/favicon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1e4192" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content={`${venueName} hosts unforgettable weddings, galas, and private celebrations in a refined event setting.`}
-    />
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={`${siteUrl}${heroImage}`} />
+    <meta property="og:image:alt" content="Elegant event ballroom at Legacy Events" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={`${siteUrl}${heroImage}`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Inter:opsz,wght@14..32,100..900&display=swap"
       rel="stylesheet"
     />
-    <title>{venueName} | Event Venue</title>
+    <script is:inline type="application/ld+json" set:html={structuredData}></script>
+    <title>{pageTitle}</title>
   </head>
   <body>
-    <main>
-      <section class="container-shell flex flex-col items-center pt-12 md:pt-20">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <main id="main-content">
+      <section aria-labelledby="hero-heading" class="container-shell flex flex-col items-center pt-12 md:pt-20">
         <div class="flex w-full max-w-[377px] flex-col items-center gap-5">
-          <img src={logoMark} alt="Legacy Events logo mark" class="h-[72px] w-[71px]" loading="eager" decoding="async" />
+          <img src={logoMark} alt="" aria-hidden="true" class="h-[72px] w-[71px]" loading="eager" decoding="async" />
           <p class="font-['Fraunces'] font-[300] text-[20px] tracking-[3px] text-[color:var(--color-brand)]">LEGACY EVENTS</p>
         </div>
 
         <div class="flex w-full max-w-[1152px] flex-col items-center justify-center gap-12 px-0 py-16 md:py-20">
-          <h1 class="hero-title">Where your story<br />becomes a Legacy.</h1>
+          <h1 id="hero-heading" class="hero-title">Where your story<br />becomes a Legacy.</h1>
           <a href="#contact" class="pill-button focus-ring bg-[color:var(--color-brand)] px-8 py-3 text-white" aria-label="Get in touch with Legacy Events">
             Get in Touch
           </a>
@@ -84,15 +121,15 @@ const amenities = [
       </section>
 
       <section class="relative h-[390px] w-full overflow-hidden md:h-[550px]">
-        <img src={heroImage} alt="Decorated ballroom prepared for an evening event" class="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async" />
+        <img src={heroImage} alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async" fetchpriority="high" />
         <div class="absolute inset-0 bg-gradient-to-b from-white/100 from-[6.5%] to-transparent to-[55.5%]"></div>
       </section>
 
-      <section class="container-shell py-16 md:py-20">
+      <section aria-labelledby="spaces-heading" class="container-shell py-16 md:py-20">
         <div class="mb-10 flex w-full items-end">
           <div class="flex w-full max-w-[579px] flex-col gap-2">
             <p class="eyebrow">Our Spaces</p>
-            <h2 class="section-title">Host Every Milestone Beautifully</h2>
+            <h2 id="spaces-heading" class="section-title">Host Every Milestone Beautifully</h2>
           </div>
         </div>
 
@@ -100,7 +137,7 @@ const amenities = [
           {
             spaces.map((space) => (
               <article class="soft-card bg-[color:var(--color-space-card)] p-7">
-                <img src={space.image} alt={space.title} class="h-[220px] w-full rounded-lg object-cover md:h-[286px]" loading="lazy" decoding="async" />
+                <img src={space.image} alt={`${space.title} event setup at ${venueName}`} class="h-[220px] w-full rounded-lg object-cover md:h-[286px]" loading="lazy" decoding="async" />
                 <h3 class="mt-3 text-2xl font-[400] leading-8 text-[color:var(--color-heading)]">{space.title}</h3>
                 <p class="body-copy mt-3">{space.text}</p>
               </article>
@@ -109,11 +146,11 @@ const amenities = [
         </div>
       </section>
 
-      <section class="w-full bg-[color:var(--color-amenity-bg)] py-16 md:py-20">
+      <section aria-labelledby="amenities-heading" class="w-full bg-[color:var(--color-amenity-bg)] py-16 md:py-20">
         <div class="container-shell">
           <div class="flex w-full max-w-[1152px] flex-col gap-2">
             <p class="eyebrow">Amenities</p>
-            <h2 class="section-title">Everything You Need, In One Venue</h2>
+            <h2 id="amenities-heading" class="section-title">Everything You Need, In One Venue</h2>
           </div>
 
           <div class="mt-8 grid gap-6 lg:grid-cols-4">
@@ -132,10 +169,11 @@ const amenities = [
         </div>
       </section>
 
-      <section class="container-shell py-16 md:py-20">
+      <section aria-labelledby="testimonial-heading" class="container-shell py-16 md:py-20">
         <div class="mx-auto flex max-w-[1100px] flex-col items-center gap-7">
           <div class="h-[3px] w-24 rounded-full bg-[color:var(--color-amenity-bg)]"></div>
-          <blockquote class="quote-title">
+          <h2 id="testimonial-heading" class="sr-only">Testimonial</h2>
+          <blockquote class="quote-title" cite={siteUrl}>
             “Our gala at Legacy Events was effortless from planning to final toast. The team delivered grace, precision, and unforgettable ambiance.”
           </blockquote>
           <p class="eyebrow text-[color:var(--color-muted)]">Jane Doe</p>
@@ -148,11 +186,11 @@ const amenities = [
         <div class="grid gap-8 lg:grid-cols-2">
           <section>
             <h2 class="text-2xl font-[400] leading-8 text-[color:var(--color-footer-light)]">Contact Us</h2>
-            <p class="mt-2 text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
+            <p id="contact-intro" class="mt-2 text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
               Share your event details and we will contact you within one business day.
             </p>
 
-            <form id="contact-form" class="mt-6 space-y-4" method="POST" action="https://api.web3forms.com/submit" novalidate>
+            <form id="contact-form" class="mt-6 space-y-4" method="POST" action="https://api.web3forms.com/submit" novalidate aria-describedby="contact-intro">
               <input type="hidden" name="access_key" value={web3formsKey} />
               <input type="hidden" name="subject" value={`New inquiry from ${venueName} website`} />
               <input type="hidden" name="from_name" value={venueName} />
@@ -163,6 +201,7 @@ const amenities = [
                   id="name"
                   name="name"
                   type="text"
+                  autocomplete="name"
                   required
                   class="focus-ring w-full rounded-lg border border-white/20 bg-white px-3 py-[9px] text-[16px] leading-[26px] text-[color:var(--color-heading)] placeholder:text-[color:var(--color-placeholder)]"
                   placeholder="Your full name"
@@ -175,6 +214,7 @@ const amenities = [
                   id="email"
                   name="email"
                   type="email"
+                  autocomplete="email"
                   required
                   class="focus-ring w-full rounded-lg border border-white/20 bg-white px-3 py-[9px] text-[16px] leading-[26px] text-[color:var(--color-heading)] placeholder:text-[color:var(--color-placeholder)]"
                   placeholder="name@example.com"
@@ -213,12 +253,13 @@ const amenities = [
               <div>
                 <h2 class="text-2xl font-[400] leading-8 text-white">Visit Us</h2>
                 <p class="mt-2 text-sm leading-5 text-[color:var(--color-footer-subtle)]">1240 Dundas St E, Belleville, ON</p>
-                <p class="mt-4 text-sm leading-5 text-[color:var(--color-footer-subtle)]">+1 (613) 555-0148</p>
-                <p class="text-sm leading-5 text-[color:var(--color-footer-subtle)]">events@legacyevents.com</p>
+                <p class="mt-4 text-sm leading-5 text-[color:var(--color-footer-subtle)]"><a class="focus-ring rounded-sm underline-offset-4 hover:underline" href="tel:+16135550148">+1 (613) 555-0148</a></p>
+                <p class="text-sm leading-5 text-[color:var(--color-footer-subtle)]"><a class="focus-ring rounded-sm underline-offset-4 hover:underline" href="mailto:events@legacyevents.com">events@legacyevents.com</a></p>
               </div>
 
               <div>
                 <h2 class="text-2xl font-[400] leading-8 text-white">Follow</h2>
+                <nav aria-label="Legacy Events social media">
                 <ul class="mt-2 space-y-2 text-sm leading-5 text-[color:var(--color-footer-subtle)]">
                   <li>
                     <a href="https://instagram.com" target="_blank" rel="noreferrer" class="focus-ring rounded-sm underline-offset-4 hover:underline">Instagram</a>
@@ -230,6 +271,7 @@ const amenities = [
                     <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="focus-ring rounded-sm underline-offset-4 hover:underline">LinkedIn</a>
                   </li>
                 </ul>
+                </nav>
               </div>
             </div>
           </section>
