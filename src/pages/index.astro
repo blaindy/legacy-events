@@ -384,15 +384,28 @@ const structuredData = JSON.stringify([
           <div class="mt-8 space-y-4">
             {
               faqItems.map((item, index) => (
-                <details class="faq-item soft-card bg-[color:var(--color-white)] px-6 py-5" open={index === 0}>
-                  <summary class="faq-trigger focus-ring rounded-sm">
+                <article class="faq-item soft-card bg-[color:var(--color-white)] px-6 py-5">
+                  <button
+                    type="button"
+                    class="faq-trigger focus-ring rounded-sm"
+                    aria-expanded={index === 0 ? 'true' : 'false'}
+                    aria-controls={`faq-answer-${index}`}
+                    id={`faq-question-${index}`}
+                  >
                     <h3 class="card-heading text-balance text-[22px] leading-7">{item.question}</h3>
                     <span class="faq-icon" aria-hidden="true">+</span>
-                  </summary>
-                  <div class="mt-4">
-                    <p class="body-copy pr-8">{item.answer}</p>
+                  </button>
+                  <div
+                    id={`faq-answer-${index}`}
+                    role="region"
+                    aria-labelledby={`faq-question-${index}`}
+                    class:list={['faq-answer', { 'is-open': index === 0 }]}
+                  >
+                    <div class="faq-answer-inner">
+                      <p class="body-copy pr-8">{item.answer}</p>
+                    </div>
                   </div>
-                </details>
+                </article>
               ))
             }
           </div>
@@ -669,6 +682,24 @@ const structuredData = JSON.stringify([
       } else {
         setTimeout(initCarousels, 0);
       }
+
+      const setupFaqAccordion = () => {
+        const triggers = Array.from(document.querySelectorAll<HTMLButtonElement>('.faq-trigger'));
+        triggers.forEach((trigger) => {
+          const answerId = trigger.getAttribute('aria-controls');
+          if (!answerId) return;
+          const answer = document.getElementById(answerId);
+          if (!(answer instanceof HTMLElement)) return;
+
+          trigger.addEventListener('click', () => {
+            const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+            trigger.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+            answer.classList.toggle('is-open', !isExpanded);
+          });
+        });
+      };
+
+      setupFaqAccordion();
 
       const setStatus = (text: string, isError = false) => {
         if (!(status instanceof HTMLElement)) return;
