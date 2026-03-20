@@ -599,9 +599,11 @@ const structuredData = JSON.stringify([
 
         const dots = Array.from(dotsWrap.querySelectorAll<HTMLButtonElement>('.carousel-dot'));
         let slidePositions = slides.map((slide) => slide.offsetLeft - track.offsetLeft);
-        let ticking = false;
+        let activeIndex = 0;
 
         const setActiveDot = (index: number) => {
+          if (index === activeIndex) return;
+          activeIndex = index;
           dots.forEach((dot, i) => {
             dot.setAttribute('aria-current', i === index ? 'true' : 'false');
           });
@@ -621,29 +623,24 @@ const structuredData = JSON.stringify([
           });
         });
 
-        const syncActiveDot = () => {
-          const trackCenter = track.scrollLeft + track.clientWidth / 2;
-          let activeIndex = 0;
-          let closest = Infinity;
-          slides.forEach((slide, i) => {
-            const slideCenter = slidePositions[i] + slide.clientWidth / 2;
-            const distance = Math.abs(slideCenter - trackCenter);
-            if (distance < closest) {
-              closest = distance;
-              activeIndex = i;
-            }
-          });
-          setActiveDot(activeIndex);
-        };
-
-        track.addEventListener('scroll', () => {
-          if (ticking) return;
-          ticking = true;
-          window.requestAnimationFrame(() => {
-            syncActiveDot();
-            ticking = false;
-          });
-        }, { passive: true });
+        const slideIndexByElement = new Map<HTMLElement, number>();
+        slides.forEach((slide, index) => slideIndexByElement.set(slide, index));
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const index = slideIndexByElement.get(entry.target as HTMLElement);
+              if (typeof index === 'number') {
+                setActiveDot(index);
+              }
+            });
+          },
+          {
+            root: track,
+            threshold: 0.6,
+          },
+        );
+        slides.forEach((slide) => observer.observe(slide));
 
         window.addEventListener('resize', updateSlidePositions, { passive: true });
 
