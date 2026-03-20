@@ -21,6 +21,7 @@ const pageDescription =
   `${venueName} hosts unforgettable weddings, corporate galas, and private celebrations in Belleville, Ontario.`;
 const canonicalUrl = `${siteUrl}/`;
 const ogImageUrl = new URL(ogImage.src, siteUrl).toString();
+const currentYear = new Date().getFullYear();
 
 const spaces = [
   {
@@ -210,7 +211,7 @@ const structuredData = JSON.stringify({
             ))
           }
         </div>
-        <div id="spaces-dots" class="carousel-dots md:hidden" aria-hidden="true"></div>
+        <div id="spaces-dots" class="carousel-dots md:hidden" aria-label="Our spaces slide navigation"></div>
       </section>
 
       <section aria-labelledby="amenities-heading" class="w-full bg-[color:var(--color-amenity-bg)] py-16 md:py-20">
@@ -239,7 +240,7 @@ const structuredData = JSON.stringify({
               ))
             }
           </div>
-          <div id="amenities-dots" class="carousel-dots md:hidden" aria-hidden="true"></div>
+          <div id="amenities-dots" class="carousel-dots md:hidden" aria-label="Amenities slide navigation"></div>
         </div>
       </section>
 
@@ -266,7 +267,7 @@ const structuredData = JSON.stringify({
               ))
             }
           </div>
-          <div id="testimonials-dots" class="carousel-dots" aria-hidden="true"></div>
+          <div id="testimonials-dots" class="carousel-dots" aria-label="Testimonials slide navigation"></div>
         </div>
       </section>
     </main>
@@ -423,7 +424,7 @@ const structuredData = JSON.stringify({
           </section>
         </div>
 
-        <p class="footer-copy mt-20 md:mt-10">© 2026 Legacy Events. All rights reserved.</p>
+        <p class="footer-copy mt-20 md:mt-10">© {currentYear} Legacy Events. All rights reserved.</p>
       </div>
     </footer>
 
@@ -445,7 +446,7 @@ const structuredData = JSON.stringify({
         dotsWrap.innerHTML = slides
           .map(
             (_, i) =>
-              `<button type="button" class="carousel-dot" aria-label="Go to slide ${i + 1}" aria-current="${i === 0}"></button>`,
+              `<button type="button" class="carousel-dot focus-ring" aria-label="Go to slide ${i + 1}" aria-controls="${carouselId}" aria-current="${i === 0}"></button>`,
           )
           .join('');
 
