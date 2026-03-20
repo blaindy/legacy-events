@@ -565,6 +565,8 @@ const structuredData = JSON.stringify([
       const status = document.getElementById('form-status');
       const successPanel = document.getElementById('form-success-panel');
       const isMobile = window.matchMedia('(max-width: 767px)').matches;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const scrollBehavior = () => (prefersReducedMotion.matches ? 'auto' : 'smooth');
 
       const setupCarouselDots = (carouselId: string, dotsId: string, mobileOnly = true) => {
         const track = document.getElementById(carouselId);
@@ -583,6 +585,8 @@ const structuredData = JSON.stringify([
           .join('');
 
         const dots = Array.from(dotsWrap.querySelectorAll<HTMLButtonElement>('.carousel-dot'));
+        let slidePositions = slides.map((slide) => slide.offsetLeft - track.offsetLeft);
+        let ticking = false;
 
         const setActiveDot = (index: number) => {
           dots.forEach((dot, i) => {
@@ -590,24 +594,26 @@ const structuredData = JSON.stringify([
           });
         };
 
+        const updateSlidePositions = () => {
+          slidePositions = slides.map((slide) => slide.offsetLeft - track.offsetLeft);
+        };
+
         dots.forEach((dot, i) => {
           dot.addEventListener('click', () => {
-            const target = slides[i];
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             track.scrollTo({
-              left: target.offsetLeft - track.offsetLeft,
-              behavior: prefersReducedMotion ? 'auto' : 'smooth',
+              left: slidePositions[i],
+              behavior: scrollBehavior(),
             });
             setActiveDot(i);
           });
         });
 
-        track.addEventListener('scroll', () => {
+        const syncActiveDot = () => {
           const trackCenter = track.scrollLeft + track.clientWidth / 2;
           let activeIndex = 0;
           let closest = Infinity;
           slides.forEach((slide, i) => {
-            const slideCenter = slide.offsetLeft - track.offsetLeft + slide.clientWidth / 2;
+            const slideCenter = slidePositions[i] + slide.clientWidth / 2;
             const distance = Math.abs(slideCenter - trackCenter);
             if (distance < closest) {
               closest = distance;
@@ -615,7 +621,18 @@ const structuredData = JSON.stringify([
             }
           });
           setActiveDot(activeIndex);
+        };
+
+        track.addEventListener('scroll', () => {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(() => {
+            syncActiveDot();
+            ticking = false;
+          });
         }, { passive: true });
+
+        window.addEventListener('resize', updateSlidePositions, { passive: true });
 
         track.addEventListener('keydown', (event) => {
           if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
@@ -629,19 +646,29 @@ const structuredData = JSON.stringify([
           if (event.key === 'Home') targetIndex = 0;
           if (event.key === 'End') targetIndex = slides.length - 1;
 
-          const target = slides[targetIndex];
-          const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
           track.scrollTo({
-            left: target.offsetLeft - track.offsetLeft,
-            behavior: prefersReducedMotion ? 'auto' : 'smooth',
+            left: slidePositions[targetIndex],
+            behavior: scrollBehavior(),
           });
           setActiveDot(targetIndex);
         });
       };
 
-      setupCarouselDots('spaces-carousel', 'spaces-dots');
-      setupCarouselDots('amenities-carousel', 'amenities-dots');
-      setupCarouselDots('testimonials-carousel', 'testimonials-dots', false);
+      const initCarousels = () => {
+        setupCarouselDots('spaces-carousel', 'spaces-dots');
+        setupCarouselDots('amenities-carousel', 'amenities-dots');
+        setupCarouselDots('testimonials-carousel', 'testimonials-dots', false);
+      };
+
+      const win = window as Window & {
+        requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
+      };
+
+      if (typeof win.requestIdleCallback === 'function') {
+        win.requestIdleCallback(initCarousels, { timeout: 800 });
+      } else {
+        setTimeout(initCarousels, 0);
+      }
 
       const setStatus = (text: string, isError = false) => {
         if (!(status instanceof HTMLElement)) return;
