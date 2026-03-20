@@ -1,6 +1,16 @@
-# Legacy Events Landing Page
+# Legacy Events Website
 
-Astro + Tailwind landing page for an events venue.
+This is a custom marketing website built for **Legacy Events** in Belleville, Ontario.
+It is a production client project (not a generic open source starter), with a tailored design,
+content structure, and contact flow for venue inquiries.
+
+## How It Is Built
+
+- Framework: Astro v6
+- Styling: Tailwind CSS v4 + project-specific CSS tokens
+- Hosting/Deploy: Vercel
+- Source control: GitHub (`blaindy/legacy-events`)
+- Form handling: Web3Forms (`PUBLIC_WEB3FORMS_ACCESS_KEY`)
 
 ## Run Locally
 
