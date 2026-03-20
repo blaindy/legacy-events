@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import SpeedInsights from '@vercel/speed-insights/astro';
 import '../styles/global.css';
 import logoMark from '../assets/logo-mark.svg';
 import heroImage from '../assets/hero.jpg';
@@ -552,5 +553,6 @@ const structuredData = JSON.stringify({
         });
       }
     </script>
+    <SpeedInsights />
   </body>
 </html>

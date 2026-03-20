@@ -42,6 +42,7 @@ npm run preview
 
 - GitHub repo: `blaindy/legacy-events`
 - Vercel project: `legacy-events`
+- Vercel Speed Insights: package is installed and `<SpeedInsights />` is integrated; ensure Speed Insights is enabled in the Vercel project dashboard.
 - GitHub Actions workflow: `.github/workflows/vercel-deploy.yml`
   - Push to `main` -> production deploy
   - PR to `main` -> preview deploy
