@@ -218,6 +218,7 @@ p {
   background: rgb(0 0 0 / 0.55);
   border: 0;
   border-radius: 999px;
+  cursor: pointer;
   height: 0.5rem;
   width: 0.5rem;
 }
