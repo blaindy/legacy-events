@@ -71,17 +71,17 @@ const testimonials = [
   {
     quote:
       'Our gala at Legacy Events was effortless from planning to final toast. The team delivered grace, precision, and unforgettable ambiance.',
-    name: 'Jane Doe',
+    name: 'Corporate client, Belleville',
   },
   {
     quote:
       'From first walkthrough to last dance, every detail felt intentional. Guests still talk about the atmosphere and flawless service.',
-    name: 'Michael R.',
+    name: 'Wedding client, Quinte region',
   },
   {
     quote:
       'Legacy Events made our celebration feel elevated yet relaxed. The staff handled every transition smoothly and professionally.',
-    name: 'Alicia T.',
+    name: 'Private event client, Belleville',
   },
 ];
 
@@ -145,6 +145,37 @@ const structuredData = JSON.stringify([
       addressCountry: 'CA',
     },
     areaServed: 'Ontario',
+    serviceArea: {
+      '@type': 'AdministrativeArea',
+      name: 'Belleville and Quinte region',
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Legacy Events services',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Wedding venue hosting',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Corporate gala hosting',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Private party hosting',
+          },
+        },
+      ],
+    },
   },
   {
     '@context': 'https://schema.org',
@@ -222,6 +253,9 @@ const structuredData = JSON.stringify([
 
         <div class="flex w-full max-w-[1152px] flex-col items-center justify-center gap-9 px-0 pt-12 pb-8">
           <h1 id="hero-heading" class="hero-title text-balance">Where your story<br />becomes a legacy.</h1>
+          <p class="body-copy max-w-[760px] text-center text-[color:var(--color-body)]">
+            Legacy Events is a Belleville, Ontario venue for weddings, corporate galas, and private celebrations across the Quinte region.
+          </p>
           <a href="#contact" class="pill-button focus-ring bg-[color:var(--color-brand)] px-8 py-3 text-white" aria-label="Get in touch with Legacy Events">
             Get in touch
           </a>
