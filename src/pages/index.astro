@@ -334,8 +334,10 @@ const structuredData = JSON.stringify([
 
       <section aria-labelledby="faq-heading" class="w-full bg-[color:var(--color-space-card)] py-16 md:py-20">
         <div class="container-shell mx-auto max-w-[960px]">
-          <p class="eyebrow">FAQ</p>
-          <h2 id="faq-heading" class="section-title mt-2 text-balance">Questions people ask before they book</h2>
+          <div class="flex flex-col gap-2">
+            <p class="eyebrow">FAQ</p>
+            <h2 id="faq-heading" class="section-title text-balance">Questions people ask before they book</h2>
+          </div>
           <div class="mt-8 space-y-4">
             {
               faqItems.map((item, index) => (
@@ -344,7 +346,7 @@ const structuredData = JSON.stringify([
                     <h3 class="card-heading text-balance text-[22px] leading-7">{item.question}</h3>
                     <span class="faq-icon" aria-hidden="true">+</span>
                   </summary>
-                  <p class="body-copy mt-3 pr-8">{item.answer}</p>
+                  <p class="body-copy mt-4 pr-8">{item.answer}</p>
                 </details>
               ))
             }
