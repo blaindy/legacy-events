@@ -247,7 +247,7 @@ const structuredData = JSON.stringify([
     <main id="main-content" tabindex="-1">
       <section aria-labelledby="hero-heading" class="container-shell flex flex-col items-center pt-10 md:pt-20">
         <div class="flex w-full max-w-[377px] flex-col items-center gap-5">
-          <Image src={logoMark} alt="" aria-hidden="true" width={71} height={72} class="h-[48px] w-[47px] md:h-[72px] md:w-[71px]" loading="eager" />
+          <Image src={logoMark} alt="Legacy Events script monogram logo" width={71} height={72} class="h-[48px] w-[47px] md:h-[72px] md:w-[71px]" loading="eager" />
           <p class="font-['Fraunces'] font-[300] text-[16px] tracking-[2px] text-[color:var(--color-brand)] md:text-[20px] md:tracking-[3px]">LEGACY EVENTS</p>
         </div>
 
@@ -265,8 +265,7 @@ const structuredData = JSON.stringify([
       <section class="relative h-[390px] w-full overflow-hidden md:h-[550px]">
         <Image
           src={heroImage}
-          alt=""
-          aria-hidden="true"
+          alt="Decorated ballroom interior prepared for a formal Legacy Events reception"
           width={1920}
           height={550}
           widths={[768, 1280, 1920]}
@@ -337,7 +336,7 @@ const structuredData = JSON.stringify([
               amenities.map((amenity) => (
                 <article class="mobile-carousel-slide flex h-full flex-col gap-4 self-stretch rounded-2xl bg-[color:var(--color-amenity-card)] p-[25px]">
                   <div class="inline-flex w-fit rounded-full bg-[color:var(--color-brand)] p-3">
-                    <Image src={amenity.icon} alt="" width={32} height={32} class="h-8 w-8" loading="lazy" aria-hidden="true" />
+                    <Image src={amenity.icon} alt={`${amenity.name} icon`} width={32} height={32} class="h-8 w-8" loading="lazy" />
                   </div>
                   <h3 class="text-balance text-[20px] leading-7 font-[400] text-[color:var(--color-heading)]">{amenity.name}</h3>
                   <p class="text-[16px] leading-[26px] font-[400] text-[color:var(--color-body)]">{amenity.text}</p>
