@@ -351,19 +351,30 @@ const structuredData = JSON.stringify({
           <section class="flex flex-col gap-8">
             <div>
               <h2 class="footer-heading text-white">Visit us</h2>
-              <div class="soft-card mt-2 overflow-hidden border border-white/20">
-                <Image
-                  src={mapImage}
-                  alt="Map showing Legacy Events location in Belleville, Ontario"
-                  width={556}
-                  height={312}
-                  widths={[420, 556, 900]}
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  format="webp"
-                  quality={74}
-                  class="h-[312px] w-full object-cover"
-                  loading="lazy"
-                />
+              <p class="mt-2 text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
+                Visit the venue and our team will gladly walk you through the space.
+              </p>
+              <div class="soft-card mt-6 overflow-hidden border border-white/20">
+                <a
+                  class="focus-ring block"
+                  href="https://www.google.com/maps/search/?api=1&query=1240+Dundas+St+E,+Belleville,+ON"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open Legacy Events map in Google Maps (opens in a new tab)"
+                >
+                  <Image
+                    src={mapImage}
+                    alt="Map showing Legacy Events location in Belleville, Ontario"
+                    width={556}
+                    height={350}
+                    widths={[420, 556, 900]}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    format="webp"
+                    quality={74}
+                    class="h-[312px] w-full object-cover md:h-[350px]"
+                    loading="lazy"
+                  />
+                </a>
               </div>
             </div>
 
