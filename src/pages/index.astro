@@ -105,7 +105,7 @@ const structuredData = JSON.stringify({
 });
 ---
 
-<html lang="en">
+<html lang="en-CA">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="/assets/favicon.png" />
@@ -127,6 +127,8 @@ const structuredData = JSON.stringify({
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Elegant event ballroom at Legacy Events" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
@@ -189,7 +191,7 @@ const structuredData = JSON.stringify({
           id="spaces-carousel"
           class="mobile-carousel md:grid md:grid-cols-3"
           role="region"
-          aria-label="Our spaces carousel"
+          aria-labelledby="spaces-heading"
           tabindex="0"
         >
           {
@@ -227,7 +229,7 @@ const structuredData = JSON.stringify({
             id="amenities-carousel"
             class="mobile-carousel mt-8 md:grid md:grid-cols-4"
             role="region"
-            aria-label="Amenities carousel"
+            aria-labelledby="amenities-heading"
             tabindex="0"
           >
             {
@@ -255,7 +257,7 @@ const structuredData = JSON.stringify({
             id="testimonials-carousel"
             class="testimonial-carousel w-full max-w-[1100px]"
             role="region"
-            aria-label="Testimonials carousel"
+            aria-labelledby="testimonial-heading"
             tabindex="0"
           >
             {
@@ -485,6 +487,27 @@ const structuredData = JSON.stringify({
             }
           });
           setActiveDot(activeIndex);
+        }, { passive: true });
+
+        track.addEventListener('keydown', (event) => {
+          if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+          event.preventDefault();
+          const currentIndexRaw = dots.findIndex((dot) => dot.getAttribute('aria-current') === 'true');
+          const currentIndex = currentIndexRaw >= 0 ? currentIndexRaw : 0;
+
+          let targetIndex = currentIndex;
+          if (event.key === 'ArrowRight') targetIndex = Math.min(slides.length - 1, currentIndex + 1);
+          if (event.key === 'ArrowLeft') targetIndex = Math.max(0, currentIndex - 1);
+          if (event.key === 'Home') targetIndex = 0;
+          if (event.key === 'End') targetIndex = slides.length - 1;
+
+          const target = slides[targetIndex];
+          const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          track.scrollTo({
+            left: target.offsetLeft - track.offsetLeft,
+            behavior: prefersReducedMotion ? 'auto' : 'smooth',
+          });
+          setActiveDot(targetIndex);
         });
       };
 

@@ -178,6 +178,8 @@ p {
   scroll-snap-type: x mandatory;
   scroll-padding-inline: clamp(1.25rem, 6vw, 9rem);
   scrollbar-width: none;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
 }
 
 .mobile-carousel::-webkit-scrollbar {
@@ -196,6 +198,8 @@ p {
   padding-bottom: 0.5rem;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
 }
 
 .testimonial-carousel::-webkit-scrollbar {
@@ -278,4 +282,18 @@ p {
 
 .skip-link:focus {
   transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .pill-button {
+    transition: none;
+  }
+
+  .pill-button:hover {
+    transform: none;
+  }
 }
