@@ -23,6 +23,7 @@ const pageDescription =
   `${venueName} hosts unforgettable weddings, corporate galas, and private celebrations in Belleville, Ontario.`;
 const canonicalUrl = `${siteUrl}/`;
 const ogImageUrl = new URL(ogImage.src, siteUrl).toString();
+const mapUrl = 'https://www.google.com/maps/search/?api=1&query=1240+Dundas+St+E,+Belleville,+ON';
 const currentYear = new Date().getFullYear();
 
 const spaces = [
@@ -84,14 +85,49 @@ const testimonials = [
   },
 ];
 
-const structuredData = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'EventVenue',
-  name: venueName,
-  url: siteUrl,
-  image: ogImageUrl,
-  telephone: '+1-613-555-0148',
-  email: 'events@legacyevents.com',
+const faqItems = [
+  {
+    question: 'What event types does Legacy Events host?',
+    answer:
+      'We host weddings, corporate galas, and private parties, with flexible room layouts and coordinated on-site support.',
+  },
+  {
+    question: 'What is included with a venue booking?',
+    answer:
+      'Each booking includes access to in-house catering, AV equipment, a bridal suite, and valet parking options.',
+  },
+  {
+    question: 'How soon do you respond to new inquiries?',
+    answer: 'Our team follows up within one business day after receiving your message through the contact form.',
+  },
+  {
+    question: 'Where is the venue located?',
+    answer: 'Legacy Events is located at 1240 Dundas St E, Belleville, Ontario, with convenient access for local and regional guests.',
+  },
+];
+
+const structuredData = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'EventVenue',
+    '@id': `${siteUrl}/#eventvenue`,
+    name: venueName,
+    url: siteUrl,
+    mainEntityOfPage: canonicalUrl,
+    image: ogImageUrl,
+    hasMap: mapUrl,
+    telephone: '+1-613-555-0148',
+    email: 'events@legacyevents.com',
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: '+1-613-555-0148',
+        email: 'events@legacyevents.com',
+        contactType: 'customer service',
+        areaServed: 'CA',
+        availableLanguage: ['en-CA'],
+      },
+    ],
     address: {
       '@type': 'PostalAddress',
       streetAddress: '1240 Dundas St E',
@@ -100,9 +136,29 @@ const structuredData = JSON.stringify({
       postalCode: 'K8N 5R8',
       addressCountry: 'CA',
     },
-  areaServed: 'Ontario',
-  sameAs: ['https://instagram.com', 'https://facebook.com', 'https://linkedin.com'],
-});
+    areaServed: 'Ontario',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: venueName,
+    url: siteUrl,
+    description: pageDescription,
+    inLanguage: 'en-CA',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  },
+]);
 ---
 
 <html lang="en-CA">
@@ -135,6 +191,7 @@ const structuredData = JSON.stringify({
     <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content="Elegant event ballroom at Legacy Events" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs Guidance" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -274,6 +331,26 @@ const structuredData = JSON.stringify({
           <div id="testimonials-dots" class="carousel-dots" aria-label="Testimonials slide navigation"></div>
         </div>
       </section>
+
+      <section aria-labelledby="faq-heading" class="w-full bg-[color:var(--color-space-card)] py-16 md:py-20">
+        <div class="container-shell mx-auto max-w-[960px]">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-heading" class="section-title mt-2 text-balance">Questions people ask before they book</h2>
+          <div class="mt-8 space-y-4">
+            {
+              faqItems.map((item, index) => (
+                <details class="faq-item soft-card bg-[color:var(--color-white)] px-6 py-5" open={index === 0}>
+                  <summary class="faq-trigger focus-ring rounded-sm">
+                    <h3 class="card-heading text-balance text-[22px] leading-7">{item.question}</h3>
+                    <span class="faq-icon" aria-hidden="true">+</span>
+                  </summary>
+                  <p class="body-copy mt-3 pr-8">{item.answer}</p>
+                </details>
+              ))
+            }
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer id="contact" class="bg-[color:var(--color-brand)] py-16 text-white">
@@ -362,7 +439,7 @@ const structuredData = JSON.stringify({
               <div class="soft-card mt-6 overflow-hidden border border-white/20">
                 <a
                   class="focus-ring block"
-                  href="https://www.google.com/maps/search/?api=1&query=1240+Dundas+St+E,+Belleville,+ON"
+                  href={mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Open Legacy Events map in Google Maps (opens in a new tab)"
@@ -388,7 +465,7 @@ const structuredData = JSON.stringify({
                 <p class="footer-copy">
                   <a
                     class="focus-ring rounded-sm underline-offset-4 hover:underline"
-                    href="https://www.google.com/maps/search/?api=1&query=1240+Dundas+St+E,+Belleville,+ON"
+                    href={mapUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Legacy Events location in Google Maps (opens in a new tab)"

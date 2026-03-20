@@ -231,6 +231,32 @@ p {
   background: var(--color-brand);
 }
 
+.faq-trigger {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.faq-trigger::-webkit-details-marker {
+  display: none;
+}
+
+.faq-icon {
+  color: var(--color-brand);
+  flex: 0 0 auto;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+}
+
 @media (min-width: 768px) {
   .mobile-carousel {
     display: grid;
@@ -295,5 +321,9 @@ p {
 
   .pill-button:hover {
     transform: none;
+  }
+
+  .faq-icon {
+    transition: none;
   }
 }
