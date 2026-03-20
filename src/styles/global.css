@@ -67,7 +67,7 @@ p {
   scroll-snap-type: x mandatory;
   scroll-padding-inline: clamp(1.25rem, 6vw, 9rem);
   scrollbar-width: none;
-  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
 }
 
@@ -87,7 +87,7 @@ p {
   padding-bottom: 0.5rem;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
 }
 
