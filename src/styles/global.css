@@ -70,7 +70,7 @@ p {
 .hero-title {
   color: var(--color-brand);
   font-family: 'Fraunces', Georgia, serif;
-  font-size: clamp(3.2rem, 8.6vw, 6.1rem);
+  font-size: clamp(2.8rem, 8.2vw, 6.1rem);
   font-weight: 300;
   line-height: 1.1;
   text-align: center;
