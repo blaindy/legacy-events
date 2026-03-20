@@ -404,10 +404,12 @@ const structuredData = JSON.stringify([
       <div class="container-shell">
         <div class="grid gap-8 lg:grid-cols-2">
           <section aria-labelledby="contact-heading">
-            <h2 id="contact-heading" class="footer-heading text-balance">Contact us</h2>
-            <p id="contact-intro" class="mt-2 text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
-              Share your event details and we will contact you within one business day.
-            </p>
+            <div class="flex flex-col gap-2">
+              <h2 id="contact-heading" class="footer-heading text-balance">Contact us</h2>
+              <p id="contact-intro" class="text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
+                Share your event details and we will contact you within one business day.
+              </p>
+            </div>
 
             <form id="contact-form" class="mt-6 space-y-4" method="POST" action="https://api.web3forms.com/submit" novalidate aria-describedby="contact-intro">
               <input type="hidden" name="access_key" value={web3formsKey} />
@@ -479,10 +481,12 @@ const structuredData = JSON.stringify([
 
           <section class="flex flex-col gap-8">
             <div>
-              <h2 class="footer-heading text-balance text-white">Visit us</h2>
-              <p class="mt-2 text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
-                Visit the venue and our team will gladly walk you through the space.
-              </p>
+              <div class="flex flex-col gap-2">
+                <h2 class="footer-heading text-balance text-white">Visit us</h2>
+                <p class="text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
+                  Visit the venue and our team will gladly walk you through the space.
+                </p>
+              </div>
               <div class="soft-card mt-6 overflow-hidden border border-white/20">
                 <a
                   class="focus-ring block"
