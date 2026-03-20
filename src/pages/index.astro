@@ -431,19 +431,10 @@ const structuredData = JSON.stringify({
     </footer>
 
     <script>
-      import { track } from '@vercel/analytics';
-
       const form = document.getElementById('contact-form');
       const status = document.getElementById('form-status');
       const successPanel = document.getElementById('form-success-panel');
       const isMobile = window.matchMedia('(max-width: 767px)').matches;
-      const safeTrack = (eventName: string, properties?: Record<string, string>) => {
-        try {
-          track(eventName, properties);
-        } catch {
-          // Silently ignore analytics errors so form UX is never blocked.
-        }
-      };
 
       const setupCarouselDots = (carouselId: string, dotsId: string, mobileOnly = true) => {
         const track = document.getElementById(carouselId);
@@ -509,31 +500,17 @@ const structuredData = JSON.stringify({
       };
 
       if (form instanceof HTMLFormElement) {
-        const formFields = form.querySelectorAll('input, textarea, select');
-        formFields.forEach((field) => {
-          field.addEventListener(
-            'focus',
-            () => {
-              safeTrack('form_started', { form: 'contact' });
-            },
-            { once: true },
-          );
-        });
-
         form.addEventListener('submit', async (event) => {
           event.preventDefault();
-          safeTrack('form_submit_attempt', { form: 'contact' });
 
           if (!form.reportValidity()) {
             setStatus('Please complete all required fields.', true);
-            safeTrack('form_submit_invalid', { form: 'contact' });
             return;
           }
 
           const accessKey = form.querySelector<HTMLInputElement>('input[name="access_key"]');
           if (!accessKey || !accessKey.value) {
             setStatus('Missing Web3Forms key. Set PUBLIC_WEB3FORMS_ACCESS_KEY in your environment.', true);
-            safeTrack('form_submit_config_error', { form: 'contact' });
             return;
           }
 
@@ -557,18 +534,15 @@ const structuredData = JSON.stringify({
               form.reset();
               form.classList.add('hidden');
               setStatus('');
-              safeTrack('form_submit_success', { form: 'contact' });
               if (successPanel instanceof HTMLElement) {
                 successPanel.classList.remove('hidden');
                 successPanel.focus();
               }
             } else {
               setStatus(result.message || 'Submission failed. Please try again.', true);
-              safeTrack('form_submit_error', { form: 'contact', type: 'api_error' });
             }
           } catch {
             setStatus('Network error. Please try again in a moment.', true);
-            safeTrack('form_submit_error', { form: 'contact', type: 'network_error' });
           } finally {
             form.setAttribute('aria-busy', 'false');
             if (submitButton instanceof HTMLButtonElement) {
