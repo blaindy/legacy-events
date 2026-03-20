@@ -18,9 +18,9 @@ import valetIcon from '../assets/amenity-valet.svg';
 const venueName = 'Legacy Events';
 const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
 const siteUrl = (import.meta.env.SITE ?? 'https://legacy-events-belleville.vercel.app').replace(/\/$/, '');
-const pageTitle = `${venueName} | Event Venue in Belleville, ON`;
+const pageTitle = `${venueName} | Wedding & Event Venue in Belleville, ON`;
 const pageDescription =
-  `${venueName} hosts unforgettable weddings, corporate galas, and private celebrations in Belleville, Ontario.`;
+  `${venueName} is a Belleville, Ontario event venue for weddings, corporate galas, and private parties. Book a tour and get a response within one business day.`;
 const canonicalUrl = `${siteUrl}/`;
 const ogImageUrl = new URL(ogImage.src, siteUrl).toString();
 const mapUrl = 'https://www.google.com/maps/search/?api=1&query=1240+Dundas+St+E,+Belleville,+ON';
@@ -30,17 +30,17 @@ const spaces = [
   {
     title: 'Weddings',
     image: weddingsImage,
-    text: 'Romantic ballroom layouts, curated timelines, and personalized setup for ceremonies and receptions.',
+    text: 'Elegant ceremony and reception layouts designed for seamless timelines, memorable photos, and effortless guest flow.',
   },
   {
     title: 'Corporate Galas',
     image: corporateImage,
-    text: 'Professional staging with premium lighting and seamless service for awards, launches, and fundraisers.',
+    text: 'Professional staging, polished lighting, and coordinated service for awards nights, launches, and fundraisers.',
   },
   {
     title: 'Private Parties',
     image: privateImage,
-    text: 'From anniversaries to milestone birthdays, celebrate with flexible spaces designed for elegant gatherings.',
+    text: 'Flexible rooms for anniversaries, milestone birthdays, and celebrations that feel elevated, warm, and well organized.',
   },
 ];
 
@@ -87,22 +87,30 @@ const testimonials = [
 
 const faqItems = [
   {
-    question: 'What event types does Legacy Events host?',
+    question: 'Can I tour Legacy Events before booking?',
     answer:
-      'We host weddings, corporate galas, and private parties, with flexible room layouts and coordinated on-site support.',
+      'Yes. We recommend touring the venue first so we can review your event goals, layout options, and preferred date in person.',
   },
   {
-    question: 'What is included with a venue booking?',
+    question: 'How far in advance should I book my event date?',
     answer:
-      'Each booking includes access to in-house catering, AV equipment, a bridal suite, and valet parking options.',
+      'Popular dates book quickly, so earlier is better. Share your target date and we will confirm current availability.',
   },
   {
-    question: 'How soon do you respond to new inquiries?',
-    answer: 'Our team follows up within one business day after receiving your message through the contact form.',
+    question: 'Do you work with outside vendors?',
+    answer: 'Yes. We can collaborate with your preferred vendors and also recommend trusted local partners when needed.',
   },
   {
-    question: 'Where is the venue located?',
-    answer: 'Legacy Events is located at 1240 Dundas St E, Belleville, Ontario, with convenient access for local and regional guests.',
+    question: 'What amenities are available on-site?',
+    answer: 'On-site amenities include in-house catering, AV equipment, a bridal suite, and valet parking support.',
+  },
+  {
+    question: 'How quickly will someone respond to my inquiry?',
+    answer: 'Our team replies within one business day after you submit the contact form.',
+  },
+  {
+    question: 'Where is Legacy Events located?',
+    answer: 'Legacy Events is located at 1240 Dundas St E, Belleville, Ontario, serving Belleville and the Quinte region.',
   },
 ];
 
@@ -169,13 +177,14 @@ const structuredData = JSON.stringify([
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#1e4192" />
-    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={pageDescription} />
     <meta name="author" content={venueName} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang="en-CA" href={canonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={venueName} />
     <meta property="og:locale" content="en_CA" />
@@ -183,6 +192,7 @@ const structuredData = JSON.stringify([
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Elegant event ballroom at Legacy Events" />
@@ -240,7 +250,7 @@ const structuredData = JSON.stringify([
         <div class="mb-10 flex w-full items-end">
           <div class="flex w-full max-w-[579px] flex-col gap-2">
             <p class="eyebrow">Our spaces</p>
-            <h2 id="spaces-heading" class="section-title text-balance">Host every milestone beautifully</h2>
+            <h2 id="spaces-heading" class="section-title text-balance">Host weddings and events in Belleville</h2>
           </div>
         </div>
 
@@ -279,7 +289,7 @@ const structuredData = JSON.stringify([
         <div class="container-shell">
           <div class="flex w-full max-w-[1152px] flex-col gap-2">
             <p class="eyebrow">Amenities</p>
-            <h2 id="amenities-heading" class="section-title text-balance">Everything you need, in one venue</h2>
+            <h2 id="amenities-heading" class="section-title text-balance">Included amenities for seamless events</h2>
           </div>
 
           <div
@@ -336,7 +346,7 @@ const structuredData = JSON.stringify([
         <div class="container-shell mx-auto max-w-[960px]">
           <div class="flex flex-col gap-2">
             <p class="eyebrow">FAQ</p>
-            <h2 id="faq-heading" class="section-title text-balance">Questions people ask before they book</h2>
+            <h2 id="faq-heading" class="section-title text-balance">Frequently asked questions before you book</h2>
           </div>
           <div class="mt-8 space-y-4">
             {
