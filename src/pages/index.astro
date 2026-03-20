@@ -356,7 +356,9 @@ const structuredData = JSON.stringify([
                     <h3 class="card-heading text-balance text-[22px] leading-7">{item.question}</h3>
                     <span class="faq-icon" aria-hidden="true">+</span>
                   </summary>
-                  <p class="body-copy mt-4 pr-8">{item.answer}</p>
+                  <div class="mt-4">
+                    <p class="body-copy pr-8">{item.answer}</p>
+                  </div>
                 </details>
               ))
             }
