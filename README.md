@@ -14,7 +14,10 @@ content structure, and contact flow for venue inquiries.
 
 ## Run Locally
 
+Use Node `22.12.0` (see `.nvmrc`) for the same install behavior as this project setup.
+
 ```bash
+nvm use
 npm install
 npm run dev
 ```
@@ -42,6 +45,7 @@ npm run preview
 
 - GitHub repo: `blaindy/legacy-events`
 - Vercel project: `legacy-events`
+- Vercel Analytics: package is installed and `<Analytics />` is integrated; ensure Web Analytics is enabled in the Vercel project dashboard.
 - Vercel Speed Insights: package is installed and `<SpeedInsights />` is integrated; ensure Speed Insights is enabled in the Vercel project dashboard.
 - GitHub Actions workflow: `.github/workflows/vercel-deploy.yml`
   - Push to `main` -> production deploy
