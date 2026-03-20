@@ -149,7 +149,7 @@ const structuredData = JSON.stringify({
         </div>
 
         <div class="flex w-full max-w-[1152px] flex-col items-center justify-center gap-9 px-0 pt-12 pb-8">
-          <h1 id="hero-heading" class="hero-title">Where your story<br />becomes a legacy.</h1>
+          <h1 id="hero-heading" class="hero-title text-balance">Where your story<br />becomes a legacy.</h1>
           <a href="#contact" class="pill-button focus-ring bg-[color:var(--color-brand)] px-8 py-3 text-white" aria-label="Get in touch with Legacy Events">
             Get in touch
           </a>
@@ -178,7 +178,7 @@ const structuredData = JSON.stringify({
         <div class="mb-10 flex w-full items-end">
           <div class="flex w-full max-w-[579px] flex-col gap-2">
             <p class="eyebrow">Our spaces</p>
-            <h2 id="spaces-heading" class="section-title">Host every milestone beautifully</h2>
+            <h2 id="spaces-heading" class="section-title text-balance">Host every milestone beautifully</h2>
           </div>
         </div>
 
@@ -204,7 +204,7 @@ const structuredData = JSON.stringify({
                   class="h-[220px] w-full rounded-lg object-cover md:h-[286px]"
                   loading="lazy"
                 />
-                <h3 class="card-heading text-2xl leading-8">{space.title}</h3>
+                <h3 class="card-heading text-balance text-2xl leading-8">{space.title}</h3>
                 <p class="body-copy">{space.text}</p>
               </article>
             ))
@@ -217,7 +217,7 @@ const structuredData = JSON.stringify({
         <div class="container-shell">
           <div class="flex w-full max-w-[1152px] flex-col gap-2">
             <p class="eyebrow">Amenities</p>
-            <h2 id="amenities-heading" class="section-title">Everything you need, in one venue</h2>
+            <h2 id="amenities-heading" class="section-title text-balance">Everything you need, in one venue</h2>
           </div>
 
           <div
@@ -233,7 +233,7 @@ const structuredData = JSON.stringify({
                   <div class="inline-flex w-fit rounded-full bg-[color:var(--color-brand)] p-3">
                     <Image src={amenity.icon} alt="" width={32} height={32} class="h-8 w-8" loading="lazy" aria-hidden="true" />
                   </div>
-                  <h3 class="card-heading text-[20px] leading-7">{amenity.name}</h3>
+                  <h3 class="card-heading text-balance text-[20px] leading-7">{amenity.name}</h3>
                   <p class="body-copy">{amenity.text}</p>
                 </article>
               ))
@@ -246,7 +246,7 @@ const structuredData = JSON.stringify({
       <section aria-labelledby="testimonial-heading" class="container-shell py-16 md:py-20">
         <div class="mx-auto flex max-w-[1100px] flex-col items-center gap-7">
           <div class="h-[3px] w-24 rounded-full bg-[color:var(--color-amenity-bg)]"></div>
-          <h2 id="testimonial-heading" class="sr-only">Testimonial</h2>
+          <h2 id="testimonial-heading" class="sr-only text-balance">Testimonial</h2>
 
           <div
             id="testimonials-carousel"
@@ -275,7 +275,7 @@ const structuredData = JSON.stringify({
       <div class="container-shell">
         <div class="grid gap-8 lg:grid-cols-2">
           <section aria-labelledby="contact-heading">
-            <h2 id="contact-heading" class="footer-heading">Contact us</h2>
+            <h2 id="contact-heading" class="footer-heading text-balance">Contact us</h2>
             <p id="contact-intro" class="mt-2 text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
               Share your event details and we will contact you within one business day.
             </p>
@@ -341,7 +341,7 @@ const structuredData = JSON.stringify({
               aria-atomic="true"
               tabindex="-1"
             >
-              <h3 class="text-xl font-[400] leading-7">Inquiry sent</h3>
+              <h3 class="text-balance text-xl font-[400] leading-7">Inquiry sent</h3>
               <p class="mt-2 text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
                 Thank you for reaching out. We will contact you within one business day.
               </p>
@@ -350,7 +350,7 @@ const structuredData = JSON.stringify({
 
           <section class="flex flex-col gap-8">
             <div>
-              <h2 class="footer-heading text-white">Visit us</h2>
+              <h2 class="footer-heading text-balance text-white">Visit us</h2>
               <p class="mt-2 text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
                 Visit the venue and our team will gladly walk you through the space.
               </p>
