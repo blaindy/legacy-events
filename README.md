@@ -45,7 +45,8 @@ npm run preview
 
 - GitHub repo: `blaindy/legacy-events`
 - Vercel project: `legacy-events`
-- AEO signals: `FAQPage` + `EventVenue` + `WebSite` JSON-LD are in `src/pages/index.astro`, and AI crawler guidance is published at `public/llms.txt`.
+- SEO/AEO signals: `EventVenue`, `WebSite`, `WebPage`, and `FAQPage` JSON-LD are in `src/pages/index.astro`; crawler guidance is published in `public/llms.txt`, `public/robots.txt`, and `public/sitemap.xml`.
+- Custom domain note: update `astro.config.mjs`, `public/robots.txt`, `public/sitemap.xml`, and `public/llms.txt` when the canonical domain changes from the Vercel URL.
 - Vercel Analytics: package is installed and `<Analytics />` is integrated; ensure Web Analytics is enabled in the Vercel project dashboard.
 - Vercel Speed Insights: package is installed and `<SpeedInsights />` is integrated; ensure Speed Insights is enabled in the Vercel project dashboard.
 - GitHub Actions workflow: `.github/workflows/vercel-deploy.yml`
