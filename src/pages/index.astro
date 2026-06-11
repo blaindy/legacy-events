@@ -23,7 +23,7 @@ const pageDescription =
   `${venueName} is a Belleville, Ontario event venue for weddings, corporate galas, and private parties. Book a tour and get a response within one business day.`;
 const canonicalUrl = `${siteUrl}/`;
 const ogImageUrl = new URL(ogImage.src, siteUrl).toString();
-const mapUrl = 'https://www.google.com/maps/search/?api=1&query=1240+Dundas+St+E,+Belleville,+ON';
+const mapUrl = 'https://www.google.com/maps/search/?api=1&query=4211+Old+Highway+2,+Belleville,+ON+K8N+4Z4';
 const currentYear = new Date().getFullYear();
 
 const spaces = [
@@ -110,7 +110,7 @@ const faqItems = [
   },
   {
     question: 'Where is Legacy Events located?',
-    answer: 'Legacy Events is located at 1240 Dundas St E, Belleville, Ontario, serving Belleville and the Quinte region.',
+    answer: 'Legacy Events is located at 4211 Old Highway 2, Belleville, Ontario, serving Belleville and the Quinte region.',
   },
 ];
 
@@ -138,10 +138,10 @@ const structuredData = JSON.stringify([
     ],
     address: {
       '@type': 'PostalAddress',
-      streetAddress: '1240 Dundas St E',
+      streetAddress: '4211 Old Highway 2',
       addressLocality: 'Belleville',
       addressRegion: 'ON',
-      postalCode: 'K8N 5R8',
+      postalCode: 'K8N 4Z4',
       addressCountry: 'CA',
     },
     areaServed: 'Ontario',
@@ -251,7 +251,7 @@ const structuredData = JSON.stringify([
           <p class="font-['Fraunces'] font-[300] text-[16px] tracking-[2px] text-[color:var(--color-brand)] md:text-[20px] md:tracking-[3px]">LEGACY EVENTS</p>
         </div>
 
-        <div class="flex w-full max-w-[1152px] flex-col items-center justify-center gap-9 px-0 pt-12 pb-8">
+        <div class="flex w-full max-w-[1152px] flex-col items-center justify-center gap-6 px-0 pt-8 pb-4 md:gap-7 md:pt-10 md:pb-5">
           <h1 id="hero-heading" class="text-balance text-center font-['Fraunces'] text-[clamp(2.8rem,8.2vw,6.1rem)] leading-[1.1] font-[300] text-[color:var(--color-brand)]">Where your story<br />becomes a legacy</h1>
           <p class="max-w-[760px] text-balance text-center text-[16px] leading-[26px] font-[400] text-[color:var(--color-body)]">
             Legacy Events is a Belleville, Ontario venue for weddings, corporate galas, and private celebrations across the Quinte region.
@@ -262,13 +262,13 @@ const structuredData = JSON.stringify([
         </div>
       </section>
 
-      <section class="relative h-[390px] w-full overflow-hidden md:h-[550px]">
+      <section class="relative h-[380px] w-full overflow-hidden md:h-[540px] lg:h-[600px]">
         <Image
           src={heroImage}
           alt="Decorated ballroom interior prepared for a formal Legacy Events reception"
-          width={1920}
-          height={550}
-          widths={[768, 1280, 1920]}
+          width={2880}
+          height={1260}
+          widths={[768, 1280, 1920, 2880]}
           sizes="100vw"
           format="webp"
           quality={80}
@@ -533,7 +533,7 @@ const structuredData = JSON.stringify([
                     rel="noopener noreferrer"
                     aria-label="Open Legacy Events location in Google Maps (opens in a new tab)"
                   >
-                    1240 Dundas St E, Belleville, ON
+                    4211 Old Highway 2, Belleville, ON K8N 4Z4
                   </a>
                 </p>
                 <p class="mt-4 text-[14px] leading-5 text-[color:var(--color-footer-subtle)]"><a class="focus-ring rounded-sm underline-offset-4 hover:underline" href="tel:+16135550148">+1 (613) 555-0148</a></p>
