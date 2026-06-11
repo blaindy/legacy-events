@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://legacy-events-belleville.vercel.app/sitemap.xml
+Sitemap: https://legacyevents.ca/sitemap.xml

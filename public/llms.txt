@@ -3,7 +3,7 @@
 Legacy Events is an event venue in Belleville, Ontario, Canada.
 
 ## Canonical Site
-- https://legacy-events-belleville.vercel.app/
+- https://legacyevents.ca/
 
 ## Primary Service Areas
 - Belleville, Ontario

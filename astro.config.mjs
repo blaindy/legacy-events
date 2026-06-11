@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://legacy-events-belleville.vercel.app',
+  site: 'https://legacyevents.ca',
   adapter: vercel(),
   vite: {
     plugins: [tailwindcss()],
