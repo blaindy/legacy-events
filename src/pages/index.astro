@@ -24,6 +24,7 @@ const pageDescription =
 const canonicalUrl = `${siteUrl}/`;
 const ogImageUrl = new URL(ogImage.src, siteUrl).toString();
 const mapUrl = 'https://www.google.com/maps/search/?api=1&query=4211+Old+Highway+2,+Belleville,+ON+K8N+4Z4';
+const contactEmail = 'Info@legacyeventsbelleville.onmicrosoft.com';
 const currentYear = new Date().getFullYear();
 
 const spaces = [
@@ -130,6 +131,16 @@ const structuredData = JSON.stringify([
     slogan: 'Where your story becomes a legacy',
     image: ogImageUrl,
     hasMap: mapUrl,
+    email: contactEmail,
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        email: contactEmail,
+        contactType: 'customer service',
+        areaServed: 'CA',
+        availableLanguage: ['en-CA'],
+      },
+    ],
     address: {
       '@type': 'PostalAddress',
       streetAddress: '4211 Old Highway 2',
@@ -566,6 +577,7 @@ const structuredData = JSON.stringify([
                     4211 Old Highway 2, Belleville, ON K8N 4Z4
                   </a>
                 </p>
+                <p class="mt-4 text-[14px] leading-5 text-[color:var(--color-footer-subtle)]"><a class="focus-ring rounded-sm underline-offset-4 hover:underline" href={`mailto:${contactEmail}`}>{contactEmail}</a></p>
               </div>
             </div>
           </section>
