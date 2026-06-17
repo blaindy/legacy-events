@@ -169,8 +169,10 @@ p {
   align-items: center;
   background: transparent;
   border: 0;
+  color: inherit;
   cursor: pointer;
   display: flex;
+  font: inherit;
   gap: 1rem;
   justify-content: space-between;
   padding: 0;

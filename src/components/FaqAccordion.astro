@@ -28,16 +28,18 @@ const headingId = `${idPrefix}-heading`;
 
           return (
             <article class="faq-item rounded-2xl bg-[color:var(--color-white)] px-6 py-5">
-              <button
-                type="button"
-                class="faq-trigger focus-ring rounded-sm"
-                aria-expanded={index === 0 ? 'true' : 'false'}
-                aria-controls={answerId}
-                id={questionId}
-              >
-                <h3 class="text-balance text-[22px] leading-7 font-[400] text-[color:var(--color-heading)]">{item.question}</h3>
-                <span class="faq-icon" aria-hidden="true">+</span>
-              </button>
+              <h3 class="text-balance text-[22px] leading-7 font-[400] text-[color:var(--color-heading)]">
+                <button
+                  type="button"
+                  class="faq-trigger focus-ring rounded-sm"
+                  aria-expanded={index === 0 ? 'true' : 'false'}
+                  aria-controls={answerId}
+                  id={questionId}
+                >
+                  <span>{item.question}</span>
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
               <div
                 id={answerId}
                 role="region"

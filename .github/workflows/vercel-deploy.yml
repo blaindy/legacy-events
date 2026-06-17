@@ -18,6 +18,7 @@ concurrency:
 
 env:
   NODE_VERSION: '22'
+  VERCEL_CLI_VERSION: '54.14.2'
 
 jobs:
   deploy-preview:
@@ -37,7 +38,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Install Vercel CLI
-        run: npm install --global vercel@latest
+        run: npm install --global vercel@${{ env.VERCEL_CLI_VERSION }}
 
       - name: Pull Vercel Environment Information (Preview)
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
@@ -65,7 +66,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Install Vercel CLI
-        run: npm install --global vercel@latest
+        run: npm install --global vercel@${{ env.VERCEL_CLI_VERSION }}
 
       - name: Pull Vercel Environment Information (Production)
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}

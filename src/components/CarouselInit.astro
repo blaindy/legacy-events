@@ -1,34 +1,24 @@
 <script>
-  const isMobile = window.matchMedia('(max-width: 767px)').matches;
+  const mobileQuery = window.matchMedia('(max-width: 767px)');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const scrollBehavior = () => (prefersReducedMotion.matches ? 'auto' : 'smooth');
 
   const setupCarouselDots = (carouselId: string, dotsId: string, mobileOnly = true) => {
     const track = document.getElementById(carouselId);
     const dotsWrap = document.getElementById(dotsId);
-    if (!(track instanceof HTMLElement) || !(dotsWrap instanceof HTMLElement)) return;
-    if (mobileOnly && !isMobile) {
-      track.removeAttribute('tabindex');
-      return;
-    }
+    if (!(track instanceof HTMLElement) || !(dotsWrap instanceof HTMLElement)) return () => {};
 
     const slides = Array.from(track.children).filter((el): el is HTMLElement => el instanceof HTMLElement);
-    if (slides.length <= 1) return;
-    track.setAttribute('tabindex', '0');
+    if (slides.length <= 1) return () => {};
 
-    dotsWrap.innerHTML = slides
-      .map(
-        (_, i) =>
-          `<button type="button" class="carousel-dot focus-ring" aria-label="Go to slide ${i + 1}" aria-controls="${carouselId}" aria-current="${i === 0}"></button>`,
-      )
-      .join('');
-
-    const dots = Array.from(dotsWrap.querySelectorAll<HTMLButtonElement>('.carousel-dot'));
-    let slidePositions = slides.map((slide) => slide.offsetLeft - track.offsetLeft);
+    let dots: HTMLButtonElement[] = [];
+    let slidePositions: number[] = [];
     let activeIndex = 0;
+    let observer: IntersectionObserver | null = null;
+    let controller: AbortController | null = null;
+    let isActive = false;
 
     const setActiveDot = (index: number) => {
-      if (index === activeIndex) return;
       activeIndex = index;
       dots.forEach((dot, i) => {
         dot.setAttribute('aria-current', i === index ? 'true' : 'false');
@@ -39,61 +29,122 @@
       slidePositions = slides.map((slide) => slide.offsetLeft - track.offsetLeft);
     };
 
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        track.scrollTo({
-          left: slidePositions[i],
-          behavior: scrollBehavior(),
-        });
-        setActiveDot(i);
+    const teardown = () => {
+      if (!isActive) return;
+      controller?.abort();
+      controller = null;
+      observer?.disconnect();
+      observer = null;
+      dots = [];
+      dotsWrap.innerHTML = '';
+      track.removeAttribute('tabindex');
+      isActive = false;
+    };
+
+    const activate = () => {
+      if (isActive) {
+        updateSlidePositions();
+        return;
+      }
+
+      isActive = true;
+      controller = new AbortController();
+      track.setAttribute('tabindex', '0');
+
+      dotsWrap.innerHTML = slides
+        .map(
+          (_, i) =>
+            `<button type="button" class="carousel-dot focus-ring" aria-label="Go to slide ${i + 1}" aria-controls="${carouselId}" aria-current="${i === 0}"></button>`,
+        )
+        .join('');
+
+      dots = Array.from(dotsWrap.querySelectorAll<HTMLButtonElement>('.carousel-dot'));
+      updateSlidePositions();
+      setActiveDot(0);
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener(
+          'click',
+          () => {
+            track.scrollTo({
+              left: slidePositions[i],
+              behavior: scrollBehavior(),
+            });
+            setActiveDot(i);
+          },
+          { signal: controller?.signal },
+        );
       });
-    });
 
-    const slideIndexByElement = new Map<HTMLElement, number>();
-    slides.forEach((slide, index) => slideIndexByElement.set(slide, index));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const index = slideIndexByElement.get(entry.target as HTMLElement);
-          if (typeof index === 'number') {
-            setActiveDot(index);
-          }
-        });
-      },
-      {
-        root: track,
-        threshold: 0.6,
-      },
-    );
-    slides.forEach((slide) => observer.observe(slide));
+      const slideIndexByElement = new Map<HTMLElement, number>();
+      slides.forEach((slide, index) => slideIndexByElement.set(slide, index));
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const index = slideIndexByElement.get(entry.target as HTMLElement);
+            if (typeof index === 'number') {
+              setActiveDot(index);
+            }
+          });
+        },
+        {
+          root: track,
+          threshold: 0.6,
+        },
+      );
+      slides.forEach((slide) => observer?.observe(slide));
 
-    window.addEventListener('resize', updateSlidePositions, { passive: true });
+      window.addEventListener('resize', updateSlidePositions, { passive: true, signal: controller.signal });
 
-    track.addEventListener('keydown', (event) => {
-      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-      event.preventDefault();
-      const currentIndexRaw = dots.findIndex((dot) => dot.getAttribute('aria-current') === 'true');
-      const currentIndex = currentIndexRaw >= 0 ? currentIndexRaw : 0;
+      track.addEventListener(
+        'keydown',
+        (event) => {
+          if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+          event.preventDefault();
+          const currentIndexRaw = dots.findIndex((dot) => dot.getAttribute('aria-current') === 'true');
+          const currentIndex = currentIndexRaw >= 0 ? currentIndexRaw : activeIndex;
 
-      let targetIndex = currentIndex;
-      if (event.key === 'ArrowRight') targetIndex = Math.min(slides.length - 1, currentIndex + 1);
-      if (event.key === 'ArrowLeft') targetIndex = Math.max(0, currentIndex - 1);
-      if (event.key === 'Home') targetIndex = 0;
-      if (event.key === 'End') targetIndex = slides.length - 1;
+          let targetIndex = currentIndex;
+          if (event.key === 'ArrowRight') targetIndex = Math.min(slides.length - 1, currentIndex + 1);
+          if (event.key === 'ArrowLeft') targetIndex = Math.max(0, currentIndex - 1);
+          if (event.key === 'Home') targetIndex = 0;
+          if (event.key === 'End') targetIndex = slides.length - 1;
 
-      track.scrollTo({
-        left: slidePositions[targetIndex],
-        behavior: scrollBehavior(),
-      });
-      setActiveDot(targetIndex);
-    });
+          track.scrollTo({
+            left: slidePositions[targetIndex],
+            behavior: scrollBehavior(),
+          });
+          setActiveDot(targetIndex);
+        },
+        { signal: controller.signal },
+      );
+    };
+
+    const refresh = () => {
+      if (!mobileOnly || mobileQuery.matches) {
+        activate();
+      } else {
+        teardown();
+      }
+    };
+
+    refresh();
+    return refresh;
   };
 
   const initCarousels = () => {
-    setupCarouselDots('spaces-carousel', 'spaces-dots');
-    setupCarouselDots('amenities-carousel', 'amenities-dots');
-    setupCarouselDots('testimonials-carousel', 'testimonials-dots', false);
+    const refreshers = [
+      setupCarouselDots('spaces-carousel', 'spaces-dots'),
+      setupCarouselDots('amenities-carousel', 'amenities-dots'),
+      setupCarouselDots('testimonials-carousel', 'testimonials-dots', false),
+    ];
+
+    const refreshCarousels = () => {
+      refreshers.forEach((refresh) => refresh());
+    };
+
+    mobileQuery.addEventListener('change', refreshCarousels);
   };
 
   const win = window as Window & {
