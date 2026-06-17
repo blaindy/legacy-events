@@ -108,15 +108,28 @@ p {
 }
 
 .carousel-dot {
-  background: rgb(0 0 0 / 0.55);
+  align-items: center;
+  background: transparent;
   border: 0;
   border-radius: 999px;
   cursor: pointer;
+  display: inline-flex;
+  height: 1.5rem;
+  justify-content: center;
+  padding: 0;
+  width: 1.5rem;
+}
+
+.carousel-dot::before {
+  background: rgb(0 0 0 / 0.55);
+  border-radius: 999px;
+  content: '';
+  display: block;
   height: 0.5rem;
   width: 0.5rem;
 }
 
-.carousel-dot[aria-current='true'] {
+.carousel-dot[aria-current='true']::before {
   background: var(--color-brand);
 }
 
@@ -154,7 +167,7 @@ p {
 }
 
 .faq-answer.is-open {
-  max-height: 14rem;
+  max-height: 40rem;
   opacity: 1;
 }
 

@@ -11,6 +11,7 @@ content structure, and contact flow for venue inquiries.
 - Hosting/Deploy: Vercel
 - Source control: GitHub (`blaindy/legacy-events`)
 - Form handling: Web3Forms (`PUBLIC_WEB3FORMS_ACCESS_KEY`)
+- Service pages: `/weddings/`, `/corporate-events/`, and `/private-events/`
 
 ## Run Locally
 

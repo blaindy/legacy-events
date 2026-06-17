@@ -1,0 +1,74 @@
+---
+import ServicePageLayout from '../layouts/ServicePageLayout.astro';
+import corporateImage from '../assets/space-corporate.jpg';
+
+const contentBlocks = [
+  {
+    title: 'A professional setting for high-visibility moments',
+    body:
+      'Corporate events need a room that feels credible the moment guests arrive. Legacy Events supports galas, fundraisers, launch events, awards nights, and formal dinners with a polished venue environment in Belleville. The space can be arranged around presentations, seated service, sponsor visibility, and natural movement between arrival, program, and reception moments.',
+  },
+  {
+    title: 'Support for presentations, staging, and service',
+    body:
+      'AV equipment, coordinated lighting, and catering support are useful for events where timing and clarity matter. Whether the event includes speeches, a slideshow, a donor presentation, or an awards program, the team can discuss the sequence during planning so service, sound, and guest experience feel aligned.',
+  },
+  {
+    title: 'A local venue for Belleville and Quinte teams',
+    body:
+      'Legacy Events gives companies, nonprofits, and organizations a Belleville-based option for events that need more polish than an everyday meeting room. A walkthrough helps confirm room configuration, guest count, arrival flow, and practical details such as parking, vendor access, and presentation requirements.',
+  },
+];
+
+const faqItems = [
+  {
+    question: 'What types of corporate events can Legacy Events host?',
+    answer:
+      'Legacy Events can host corporate galas, fundraisers, awards nights, launch events, formal dinners, and private organizational gatherings.',
+  },
+  {
+    question: 'Does the venue support presentations or speeches?',
+    answer:
+      'Yes. AV equipment is listed among the venue amenities, and presentation needs can be reviewed during the planning process.',
+  },
+  {
+    question: 'Can catering be coordinated for corporate events?',
+    answer:
+      'Yes. In-house catering is one of the listed amenities, helping corporate hosts plan food service alongside the event timeline.',
+  },
+];
+
+const relatedLinks = [
+  {
+    href: '/weddings/',
+    label: 'Weddings',
+    text: 'Learn how Legacy Events supports ceremony and reception timelines for couples across the Quinte region.',
+  },
+  {
+    href: '/private-events/',
+    label: 'Private Events',
+    text: 'Explore venue options for anniversaries, birthdays, and other private celebrations.',
+  },
+];
+---
+
+<ServicePageLayout
+  slug="corporate-events"
+  pageTitle="Corporate Event Venue in Belleville, ON | Legacy Events"
+  pageDescription="Legacy Events hosts corporate galas, fundraisers, awards nights, and polished business events in Belleville with catering and AV support."
+  eyebrow="Corporate Event Venue"
+  heading="Corporate event venue in Belleville"
+  intro="Host galas, fundraisers, launches, and awards nights in a Belleville venue designed for professional presentation and comfortable guest movement."
+  image={corporateImage}
+  imageAlt="Corporate gala setup at Legacy Events in Belleville"
+  serviceName="Corporate event hosting"
+  serviceType="Corporate event venue"
+  highlights={[
+    'Layouts can support seated dinners, speeches, presentations, sponsor moments, and reception-style networking.',
+    'AV equipment and coordinated service help keep programs clear, professional, and on schedule.',
+    'Belleville location supports local teams, nonprofit groups, and regional organizations across the Quinte area.',
+  ]}
+  contentBlocks={contentBlocks}
+  faqItems={faqItems}
+  relatedLinks={relatedLinks}
+/>

@@ -3,10 +3,11 @@ import { Image } from 'astro:assets';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import '../styles/global.css';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import Footer from '../components/Footer.astro';
 import logoMark from '../assets/logo-mark.svg';
 import heroImage from '../assets/hero.jpg';
 import ogImage from '../assets/og-image.jpg';
-import mapImage from '../assets/map.png';
 import weddingsImage from '../assets/space-weddings.jpg';
 import corporateImage from '../assets/space-corporate.jpg';
 import privateImage from '../assets/space-private.jpg';
@@ -16,7 +17,6 @@ import bridalIcon from '../assets/amenity-bridal.svg';
 import valetIcon from '../assets/amenity-valet.svg';
 
 const venueName = 'Legacy Events';
-const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
 const siteUrl = (import.meta.env.SITE ?? 'https://legacyevents.ca').replace(/\/$/, '');
 const pageTitle = `${venueName} | Wedding & Event Venue in Belleville, ON`;
 const pageDescription =
@@ -25,23 +25,28 @@ const canonicalUrl = `${siteUrl}/`;
 const ogImageUrl = new URL(ogImage.src, siteUrl).toString();
 const mapUrl = 'https://www.google.com/maps/search/?api=1&query=4211+Old+Highway+2,+Belleville,+ON+K8N+4Z4';
 const contactEmail = 'Info@legacyeventsbelleville.onmicrosoft.com';
-const currentYear = new Date().getFullYear();
 
 const spaces = [
   {
     title: 'Weddings',
     image: weddingsImage,
     text: 'Elegant ceremony and reception layouts designed for seamless timelines, memorable photos, and effortless guest flow.',
+    href: '/weddings/',
+    linkText: 'Explore wedding hosting',
   },
   {
     title: 'Corporate Galas',
     image: corporateImage,
     text: 'Professional staging, polished lighting, and coordinated service for awards nights, launches, and fundraisers.',
+    href: '/corporate-events/',
+    linkText: 'Explore corporate events',
   },
   {
     title: 'Private Parties',
     image: privateImage,
     text: 'Flexible rooms for anniversaries, milestone birthdays, and celebrations that feel elevated, warm, and well organized.',
+    href: '/private-events/',
+    linkText: 'Explore private events',
   },
 ];
 
@@ -352,6 +357,12 @@ const structuredData = JSON.stringify([
                 />
                 <h3 class="text-balance text-2xl leading-8 font-[400] text-[color:var(--color-heading)]">{space.title}</h3>
                 <p class="text-[16px] leading-[26px] font-[400] text-[color:var(--color-body)]">{space.text}</p>
+                <a
+                  href={space.href}
+                  class="focus-ring mt-auto inline-flex w-fit rounded-sm text-[16px] leading-6 font-[700] text-[color:var(--color-brand)] underline-offset-4 hover:underline"
+                >
+                  {space.linkText}
+                </a>
               </article>
             ))
           }
@@ -362,7 +373,7 @@ const structuredData = JSON.stringify([
       <section aria-labelledby="amenities-heading" class="w-full bg-[color:var(--color-amenity-bg)] py-16 md:py-20">
         <div class="container-shell">
           <div class="flex w-full max-w-[579px] flex-col gap-2">
-            <p class="text-[12px] leading-4 font-[400] tracking-[2.4px] uppercase text-[color:var(--color-body)]">Amenities</p>
+            <p class="text-[12px] leading-4 font-[400] tracking-[2.4px] uppercase text-[color:var(--color-brand)]">Amenities</p>
             <h2 id="amenities-heading" class="text-balance text-[clamp(1.9rem,2.7vw,2.25rem)] leading-[1.12] font-[400] text-[color:var(--color-heading)]">Included amenities for seamless events</h2>
           </div>
 
@@ -371,7 +382,6 @@ const structuredData = JSON.stringify([
             class="mobile-carousel mt-8 md:grid md:grid-cols-4"
             role="region"
             aria-labelledby="amenities-heading"
-            tabindex="0"
           >
             {
               amenities.map((amenity) => (
@@ -399,7 +409,6 @@ const structuredData = JSON.stringify([
             class="testimonial-carousel w-full max-w-[1100px]"
             role="region"
             aria-labelledby="testimonial-heading"
-            tabindex="0"
           >
             {
               testimonials.map((testimonial) => (
@@ -416,181 +425,12 @@ const structuredData = JSON.stringify([
         </div>
       </section>
 
-      <section aria-labelledby="faq-heading" class="w-full bg-[color:var(--color-space-card)] py-16 md:py-20">
-        <div class="container-shell mx-auto max-w-[960px]">
-          <div class="flex w-full max-w-[579px] flex-col gap-2">
-            <h2 id="faq-heading" class="text-balance text-[clamp(1.9rem,2.7vw,2.25rem)] leading-[1.12] font-[400] text-[color:var(--color-heading)]">Frequently asked questions before you book</h2>
-          </div>
-          <div class="mt-8 space-y-4">
-            {
-              faqItems.map((item, index) => (
-                <article class="faq-item rounded-2xl bg-[color:var(--color-white)] px-6 py-5">
-                  <button
-                    type="button"
-                    class="faq-trigger focus-ring rounded-sm"
-                    aria-expanded={index === 0 ? 'true' : 'false'}
-                    aria-controls={`faq-answer-${index}`}
-                    id={`faq-question-${index}`}
-                  >
-                    <h3 class="text-balance text-[22px] leading-7 font-[400] text-[color:var(--color-heading)]">{item.question}</h3>
-                    <span class="faq-icon" aria-hidden="true">+</span>
-                  </button>
-                  <div
-                    id={`faq-answer-${index}`}
-                    role="region"
-                    aria-labelledby={`faq-question-${index}`}
-                    class:list={['faq-answer', { 'is-open': index === 0 }]}
-                  >
-                    <div class="faq-answer-inner">
-                      <p class="pr-8 text-[16px] leading-[26px] font-[400] text-[color:var(--color-body)]">{item.answer}</p>
-                    </div>
-                  </div>
-                </article>
-              ))
-            }
-          </div>
-        </div>
-      </section>
+      <FaqAccordion items={faqItems} heading="Frequently asked questions before you book" idPrefix="home-faq" sectionId="faq" />
     </main>
 
-    <footer id="contact" class="bg-[color:var(--color-brand)] py-16 text-white">
-      <div class="container-shell">
-        <div class="grid gap-8 lg:grid-cols-2">
-          <section aria-labelledby="contact-heading">
-            <div class="flex flex-col gap-2">
-              <h2 id="contact-heading" class="text-balance text-[24px] leading-8 font-[400] text-[color:var(--color-footer-light)]">Contact us</h2>
-              <p id="contact-intro" class="text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
-                Share your event details and we will contact you within one business day.
-              </p>
-            </div>
-
-            <form id="contact-form" class="mt-6 space-y-4" method="POST" action="https://api.web3forms.com/submit" novalidate aria-describedby="contact-intro">
-              <input type="hidden" name="access_key" value={web3formsKey} />
-              <input type="hidden" name="subject" value={`New inquiry from ${venueName} website`} />
-              <input type="hidden" name="from_name" value={venueName} />
-
-              <div>
-                <label for="name" class="mb-1 block text-[14px] leading-5 font-[400] text-[color:var(--color-footer-light)]">Name</label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  autocomplete="name"
-                  required
-                  class="focus-ring w-full rounded-lg border border-white/20 bg-[color:var(--color-white)] px-3 py-[9px] text-[16px] leading-[26px] text-[color:var(--color-heading)] placeholder:text-[color:var(--color-placeholder)]"
-                  placeholder="Your full name"
-                />
-              </div>
-
-              <div>
-                <label for="email" class="mb-1 block text-[14px] leading-5 font-[400] text-[color:var(--color-footer-light)]">Email</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  required
-                  class="focus-ring w-full rounded-lg border border-white/20 bg-[color:var(--color-white)] px-3 py-[9px] text-[16px] leading-[26px] text-[color:var(--color-heading)] placeholder:text-[color:var(--color-placeholder)]"
-                  placeholder="name@example.com"
-                />
-              </div>
-
-              <div>
-                <label for="message" class="mb-1 block text-[14px] leading-5 font-[400] text-[color:var(--color-footer-light)]">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="4"
-                  required
-                  class="focus-ring w-full rounded-lg border border-white/20 bg-[color:var(--color-white)] px-3 py-[9px] text-[16px] leading-[26px] text-[color:var(--color-heading)] placeholder:text-[color:var(--color-placeholder)]"
-                  placeholder="Tell us about your event date, guest count, and vision."
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                class="focus-ring inline-flex cursor-pointer items-center justify-center rounded-full bg-white px-6 py-2.5 text-[16px] leading-6 font-[700] text-[color:var(--color-submit-text)] no-underline transition [transition-property:transform,filter] hover:brightness-[0.94] hover:-translate-y-px motion-reduce:transition-none motion-reduce:hover:translate-y-0 disabled:cursor-not-allowed"
-              >
-                Send Inquiry
-              </button>
-
-              <p id="form-status" class="min-h-[1.25rem] text-sm text-[color:var(--color-footer-light)]" role="status" aria-live="polite"></p>
-            </form>
-
-            <div
-              id="form-success-panel"
-              class="mt-6 hidden rounded-2xl bg-white/10 p-6 text-[color:var(--color-footer-light)]"
-              role="status"
-              aria-live="polite"
-              aria-atomic="true"
-              tabindex="-1"
-            >
-                <h3 class="text-balance text-xl leading-7 font-[400] text-[color:var(--color-footer-light)]">Inquiry sent</h3>
-              <p class="mt-2 text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
-                Thank you for reaching out. We will contact you within one business day.
-              </p>
-            </div>
-          </section>
-
-          <section class="flex flex-col gap-8">
-            <div>
-              <div class="flex flex-col gap-2">
-                <h2 class="text-balance text-[24px] leading-8 font-[400] text-[color:var(--color-footer-light)]">Visit us</h2>
-                <p class="text-[16px] leading-[26px] text-[color:var(--color-footer-subtle)]">
-                  Visit the venue and our team will gladly walk you through the space.
-                </p>
-              </div>
-              <div class="mt-6 overflow-hidden rounded-2xl border border-white/20">
-                <a
-                  class="focus-ring block"
-                  href={mapUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Open Legacy Events map in Google Maps (opens in a new tab)"
-                >
-                  <Image
-                    src={mapImage}
-                    alt="Map showing Legacy Events location in Belleville, Ontario"
-                    width={556}
-                    height={350}
-                    widths={[420, 556, 900]}
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    format="webp"
-                    quality={74}
-                    class="h-[312px] w-full object-cover md:h-[350px]"
-                    loading="lazy"
-                  />
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <div>
-                <p class="text-[14px] leading-5 text-[color:var(--color-footer-subtle)]">
-                  <a
-                    class="focus-ring rounded-sm underline-offset-4 hover:underline"
-                    href={mapUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Open Legacy Events location in Google Maps (opens in a new tab)"
-                  >
-                    4211 Old Highway 2, Belleville, ON K8N 4Z4
-                  </a>
-                </p>
-                <p class="mt-4 text-[14px] leading-5 text-[color:var(--color-footer-subtle)]"><a class="focus-ring rounded-sm underline-offset-4 hover:underline" href={`mailto:${contactEmail}`}>{contactEmail}</a></p>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <p class="mt-20 text-[14px] leading-5 text-[color:var(--color-footer-subtle)] md:mt-10">© {currentYear} Legacy Events. All rights reserved.</p>
-      </div>
-    </footer>
+    <Footer />
 
     <script>
-      const form = document.getElementById('contact-form');
-      const status = document.getElementById('form-status');
-      const successPanel = document.getElementById('form-success-panel');
       const isMobile = window.matchMedia('(max-width: 767px)').matches;
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       const scrollBehavior = () => (prefersReducedMotion.matches ? 'auto' : 'smooth');
@@ -599,10 +439,14 @@ const structuredData = JSON.stringify([
         const track = document.getElementById(carouselId);
         const dotsWrap = document.getElementById(dotsId);
         if (!(track instanceof HTMLElement) || !(dotsWrap instanceof HTMLElement)) return;
-        if (mobileOnly && !isMobile) return;
+        if (mobileOnly && !isMobile) {
+          track.removeAttribute('tabindex');
+          return;
+        }
 
         const slides = Array.from(track.children).filter((el): el is HTMLElement => el instanceof HTMLElement);
         if (slides.length <= 1) return;
+        track.setAttribute('tabindex', '0');
 
         dotsWrap.innerHTML = slides
           .map(
@@ -694,85 +538,6 @@ const structuredData = JSON.stringify([
         setTimeout(initCarousels, 0);
       }
 
-      const setupFaqAccordion = () => {
-        const triggers = Array.from(document.querySelectorAll<HTMLButtonElement>('.faq-trigger'));
-        triggers.forEach((trigger) => {
-          const answerId = trigger.getAttribute('aria-controls');
-          if (!answerId) return;
-          const answer = document.getElementById(answerId);
-          if (!(answer instanceof HTMLElement)) return;
-
-          trigger.addEventListener('click', () => {
-            const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
-            trigger.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
-            answer.classList.toggle('is-open', !isExpanded);
-          });
-        });
-      };
-
-      setupFaqAccordion();
-
-      const setStatus = (text: string, isError = false) => {
-        if (!(status instanceof HTMLElement)) return;
-        status.textContent = text;
-        status.classList.toggle('text-red-200', isError);
-        status.classList.toggle('text-[color:var(--color-footer-light)]', !isError);
-      };
-
-      if (form instanceof HTMLFormElement) {
-        form.addEventListener('submit', async (event) => {
-          event.preventDefault();
-
-          if (!form.reportValidity()) {
-            setStatus('Please complete all required fields.', true);
-            return;
-          }
-
-          const accessKey = form.querySelector<HTMLInputElement>('input[name="access_key"]');
-          if (!accessKey || !accessKey.value) {
-            setStatus('Missing Web3Forms key. Set PUBLIC_WEB3FORMS_ACCESS_KEY in your environment.', true);
-            return;
-          }
-
-          const submitButton = form.querySelector('button[type="submit"]');
-          if (submitButton instanceof HTMLButtonElement) {
-            submitButton.disabled = true;
-            submitButton.setAttribute('aria-disabled', 'true');
-            submitButton.textContent = 'Sending...';
-          }
-          form.setAttribute('aria-busy', 'true');
-
-          try {
-            const payload = new FormData(form);
-            const response = await fetch(form.action, {
-              method: 'POST',
-              body: payload,
-            });
-
-            const result = await response.json();
-            if (result.success) {
-              form.reset();
-              form.classList.add('hidden');
-              setStatus('');
-              if (successPanel instanceof HTMLElement) {
-                successPanel.classList.remove('hidden');
-                successPanel.focus();
-              }
-            } else {
-              setStatus(result.message || 'Submission failed. Please try again.', true);
-            }
-          } catch {
-            setStatus('Network error. Please try again in a moment.', true);
-          } finally {
-            form.setAttribute('aria-busy', 'false');
-            if (submitButton instanceof HTMLButtonElement) {
-              submitButton.disabled = false;
-              submitButton.removeAttribute('aria-disabled');
-              submitButton.textContent = 'Send Inquiry';
-            }
-          }
-        });
-      }
     </script>
     <Analytics />
     <SpeedInsights />

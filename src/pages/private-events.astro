@@ -1,0 +1,74 @@
+---
+import ServicePageLayout from '../layouts/ServicePageLayout.astro';
+import privateImage from '../assets/space-private.jpg';
+
+const contentBlocks = [
+  {
+    title: 'A flexible venue for personal celebrations',
+    body:
+      'Private events often need a balance of warmth, organization, and enough polish to make the occasion feel special. Legacy Events supports anniversaries, milestone birthdays, family celebrations, and private parties in Belleville with flexible room layouts and an event setting that feels elevated without becoming complicated.',
+  },
+  {
+    title: 'Designed for hosts who want fewer moving parts',
+    body:
+      'Amenities such as in-house catering, AV equipment, and valet parking can simplify the planning process for private hosts. Instead of coordinating every element separately, guests can focus on the reason for gathering while the event timeline, food service, arrival experience, and room flow are planned around the celebration.',
+  },
+  {
+    title: 'A place for memorable gatherings in the Quinte region',
+    body:
+      'Legacy Events is located on Old Highway 2 in Belleville, making it accessible for local guests and visitors from across the Quinte region. A venue tour gives hosts a chance to talk through the guest list, desired atmosphere, preferred date, and any special details that should shape the room setup.',
+  },
+];
+
+const faqItems = [
+  {
+    question: 'What private events can Legacy Events host?',
+    answer:
+      'Legacy Events can host milestone birthdays, anniversaries, family celebrations, private parties, and other personal gatherings.',
+  },
+  {
+    question: 'Can the room layout be adjusted for different private events?',
+    answer:
+      'Yes. Layout options can be reviewed during a venue tour based on guest count, event style, and timing needs.',
+  },
+  {
+    question: 'How soon will someone respond to a private event inquiry?',
+    answer:
+      'The team replies within one business day after a contact form submission.',
+  },
+];
+
+const relatedLinks = [
+  {
+    href: '/weddings/',
+    label: 'Weddings',
+    text: 'Explore ceremony and reception planning for couples hosting in Belleville.',
+  },
+  {
+    href: '/corporate-events/',
+    label: 'Corporate Events',
+    text: 'See how Legacy Events supports galas, fundraisers, awards nights, and business gatherings.',
+  },
+];
+---
+
+<ServicePageLayout
+  slug="private-events"
+  pageTitle="Private Event Venue in Belleville, ON | Legacy Events"
+  pageDescription="Legacy Events hosts private parties, anniversaries, milestone birthdays, and personal celebrations in Belleville and the Quinte region."
+  eyebrow="Private Event Venue"
+  heading="Private event venue in Belleville"
+  intro="Bring family, friends, and guests together in a Belleville venue suited for anniversaries, milestone birthdays, and private celebrations."
+  image={privateImage}
+  imageAlt="Private party setup at Legacy Events in Belleville"
+  serviceName="Private event hosting"
+  serviceType="Private event venue"
+  highlights={[
+    'Flexible room layouts help private parties feel organized, comfortable, and personal.',
+    'Catering, AV support, and valet parking help simplify the host experience.',
+    'The Belleville location serves guests from the city and the wider Quinte region.',
+  ]}
+  contentBlocks={contentBlocks}
+  faqItems={faqItems}
+  relatedLinks={relatedLinks}
+/>

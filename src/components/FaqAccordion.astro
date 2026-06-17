@@ -1,0 +1,81 @@
+---
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FaqItem[];
+  heading: string;
+  idPrefix?: string;
+  sectionId?: string;
+}
+
+const { items, heading, idPrefix = 'faq', sectionId } = Astro.props;
+const headingId = `${idPrefix}-heading`;
+---
+
+<section id={sectionId} aria-labelledby={headingId} class="w-full bg-[color:var(--color-space-card)] py-16 md:py-20">
+  <div class="container-shell mx-auto max-w-[960px]">
+    <div class="flex w-full max-w-[579px] flex-col gap-2">
+      <h2 id={headingId} class="text-balance text-[clamp(1.9rem,2.7vw,2.25rem)] leading-[1.12] font-[400] text-[color:var(--color-heading)]">{heading}</h2>
+    </div>
+    <div class="mt-8 space-y-4">
+      {
+        items.map((item, index) => {
+          const questionId = `${idPrefix}-question-${index}`;
+          const answerId = `${idPrefix}-answer-${index}`;
+
+          return (
+            <article class="faq-item rounded-2xl bg-[color:var(--color-white)] px-6 py-5">
+              <button
+                type="button"
+                class="faq-trigger focus-ring rounded-sm"
+                aria-expanded={index === 0 ? 'true' : 'false'}
+                aria-controls={answerId}
+                id={questionId}
+              >
+                <h3 class="text-balance text-[22px] leading-7 font-[400] text-[color:var(--color-heading)]">{item.question}</h3>
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </button>
+              <div
+                id={answerId}
+                role="region"
+                aria-labelledby={questionId}
+                aria-hidden={index === 0 ? 'false' : 'true'}
+                class:list={['faq-answer', { 'is-open': index === 0 }]}
+              >
+                <div class="faq-answer-inner">
+                  <p class="pr-8 text-[16px] leading-[26px] font-[400] text-[color:var(--color-body)]">{item.answer}</p>
+                </div>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  {
+    const setupFaqAccordion = () => {
+      const triggers = Array.from(document.querySelectorAll<HTMLButtonElement>('.faq-trigger'));
+      triggers.forEach((trigger) => {
+        const answerId = trigger.getAttribute('aria-controls');
+        if (!answerId) return;
+        const answer = document.getElementById(answerId);
+        if (!(answer instanceof HTMLElement)) return;
+
+        trigger.addEventListener('click', () => {
+          const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+          trigger.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+          answer.setAttribute('aria-hidden', isExpanded ? 'true' : 'false');
+          answer.classList.toggle('is-open', !isExpanded);
+        });
+      });
+    };
+
+    setupFaqAccordion();
+  }
+</script>
