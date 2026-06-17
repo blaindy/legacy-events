@@ -39,17 +39,17 @@ import { addressText, contactEmail, mapUrl } from '../lib/site';
   <div>
     <p class="text-[14px] leading-5 text-[color:var(--color-footer-subtle)]">
       <a
-        class="focus-ring rounded-sm underline-offset-4 hover:underline"
+        class="focus-ring inline-flex min-h-6 items-center rounded-sm underline-offset-4 hover:underline"
         href={mapUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Open Legacy Events location in Google Maps (opens in a new tab)"
+        aria-label={`${addressText} - Open Legacy Events location in Google Maps (opens in a new tab)`}
       >
         {addressText}
       </a>
     </p>
     <p class="mt-4 text-[14px] leading-5 text-[color:var(--color-footer-subtle)]">
-      <a class="focus-ring rounded-sm underline-offset-4 hover:underline" href={`mailto:${contactEmail}`}>{contactEmail}</a>
+      <a class="focus-ring inline-flex min-h-6 items-center rounded-sm underline-offset-4 hover:underline" href={`mailto:${contactEmail}`}>{contactEmail}</a>
     </p>
   </div>
 </section>

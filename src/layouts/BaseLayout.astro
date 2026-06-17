@@ -31,6 +31,9 @@ const {
   ogImageHeight = 630,
   includeFooter = true,
 } = Astro.props;
+
+const nodeProcess = (globalThis as typeof globalThis & { process?: { env?: Record<string, string | undefined> } }).process;
+const enableVercelTelemetry = import.meta.env.PROD && Boolean(nodeProcess?.env?.VERCEL);
 ---
 
 <html lang="en-CA">
@@ -55,7 +58,7 @@ const {
     </main>
     {includeFooter && <Footer />}
     <slot name="scripts" />
-    <Analytics />
-    <SpeedInsights />
+    {enableVercelTelemetry && <Analytics />}
+    {enableVercelTelemetry && <SpeedInsights />}
   </body>
 </html>
