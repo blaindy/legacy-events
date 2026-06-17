@@ -1,128 +1,22 @@
 ---
 import { Image } from 'astro:assets';
-import Analytics from '@vercel/analytics/astro';
-import SpeedInsights from '@vercel/speed-insights/astro';
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import CarouselInit from '../components/CarouselInit.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
-import Footer from '../components/Footer.astro';
-import logoMark from '../assets/logo-mark.svg';
+import LogoLockup from '../components/LogoLockup.astro';
+import SectionIntro from '../components/SectionIntro.astro';
+import { amenities, faqItems, spaces, testimonials } from '../data/home';
+import { servicePages } from '../data/services';
 import heroImage from '../assets/hero.jpg';
 import ogImage from '../assets/og-image.jpg';
-import weddingsImage from '../assets/space-weddings.jpg';
-import corporateImage from '../assets/space-corporate.jpg';
-import privateImage from '../assets/space-private.jpg';
-import cateringIcon from '../assets/amenity-catering.svg';
-import avIcon from '../assets/amenity-av.svg';
-import bridalIcon from '../assets/amenity-bridal.svg';
-import valetIcon from '../assets/amenity-valet.svg';
+import { contactEmail, mapUrl, optionalEventVenueSchema, postalAddress, serviceAreaName, siteSlogan, siteUrl, venueName } from '../lib/site';
 
-const venueName = 'Legacy Events';
-const siteUrl = (import.meta.env.SITE ?? 'https://legacyevents.ca').replace(/\/$/, '');
 const pageTitle = `${venueName} | Wedding & Event Venue in Belleville, ON`;
 const pageDescription =
   `${venueName} is a Belleville, Ontario event venue for weddings, corporate galas, and private parties. Book a tour and get a response within one business day.`;
 const canonicalUrl = `${siteUrl}/`;
 const ogImageUrl = new URL(ogImage.src, siteUrl).toString();
-const mapUrl = 'https://www.google.com/maps/search/?api=1&query=4211+Old+Highway+2,+Belleville,+ON+K8N+4Z4';
-const contactEmail = 'Info@legacyeventsbelleville.onmicrosoft.com';
-
-const spaces = [
-  {
-    title: 'Weddings',
-    image: weddingsImage,
-    text: 'Elegant ceremony and reception layouts designed for seamless timelines, memorable photos, and effortless guest flow.',
-    href: '/weddings/',
-    linkText: 'Explore wedding hosting',
-  },
-  {
-    title: 'Corporate Galas',
-    image: corporateImage,
-    text: 'Professional staging, polished lighting, and coordinated service for awards nights, launches, and fundraisers.',
-    href: '/corporate-events/',
-    linkText: 'Explore corporate events',
-  },
-  {
-    title: 'Private Parties',
-    image: privateImage,
-    text: 'Flexible rooms for anniversaries, milestone birthdays, and celebrations that feel elevated, warm, and well organized.',
-    href: '/private-events/',
-    linkText: 'Explore private events',
-  },
-];
-
-const amenities = [
-  {
-    name: 'In-house Catering',
-    icon: cateringIcon,
-    text: 'Seasonal menus, chef-led tastings, and polished table service tailored for every celebration style.',
-  },
-  {
-    name: 'AV Equipment',
-    icon: avIcon,
-    text: 'Premium sound, discreet lighting, and seamless presentations managed by experts throughout your event.',
-  },
-  {
-    name: 'Bridal Suite',
-    icon: bridalIcon,
-    text: 'Private prep spaces, calming details, and elegant mirrors designed for memorable wedding moments.',
-  },
-  {
-    name: 'Valet Parking',
-    icon: valetIcon,
-    text: 'Welcoming arrivals, efficient routing, and attentive attendants ensuring smooth guest access all evening.',
-  },
-];
-
-const testimonials = [
-  {
-    quote:
-      'Our gala at Legacy Events was effortless from planning to final toast. The team delivered grace, precision, and unforgettable ambiance.',
-    name: 'Corporate client, Belleville',
-  },
-  {
-    quote:
-      'From first walkthrough to last dance, every detail felt intentional. Guests still talk about the atmosphere and flawless service.',
-    name: 'Wedding client, Quinte region',
-  },
-  {
-    quote:
-      'Legacy Events made our celebration feel elevated yet relaxed. The staff handled every transition smoothly and professionally.',
-    name: 'Private event client, Belleville',
-  },
-];
-
-const faqItems = [
-  {
-    question: 'Can I tour Legacy Events before booking?',
-    answer:
-      'Yes. We recommend touring the venue first so we can review your event goals, layout options, and preferred date in person.',
-  },
-  {
-    question: 'How far in advance should I book my event date?',
-    answer:
-      'Popular dates book quickly, so earlier is better. Share your target date and we will confirm current availability.',
-  },
-  {
-    question: 'Do you work with outside vendors?',
-    answer: 'Yes. We can collaborate with your preferred vendors and also recommend trusted local partners when needed.',
-  },
-  {
-    question: 'What types of events can Legacy Events host?',
-    answer: 'Legacy Events hosts weddings, corporate galas, and private parties in Belleville, Ontario.',
-  },
-  {
-    question: 'What amenities are available on-site?',
-    answer: 'On-site amenities include in-house catering, AV equipment, a bridal suite, and valet parking support.',
-  },
-  {
-    question: 'How quickly will someone respond to my inquiry?',
-    answer: 'Our team replies within one business day after you submit the contact form.',
-  },
-  {
-    question: 'Where is Legacy Events located?',
-    answer: 'Legacy Events is located at 4211 Old Highway 2, Belleville, Ontario, serving Belleville and the Quinte region.',
-  },
-];
 
 const structuredData = JSON.stringify([
   {
@@ -133,7 +27,7 @@ const structuredData = JSON.stringify([
     url: siteUrl,
     mainEntityOfPage: canonicalUrl,
     description: pageDescription,
-    slogan: 'Where your story becomes a legacy',
+    slogan: siteSlogan,
     image: ogImageUrl,
     hasMap: mapUrl,
     email: contactEmail,
@@ -146,18 +40,11 @@ const structuredData = JSON.stringify([
         availableLanguage: ['en-CA'],
       },
     ],
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: '4211 Old Highway 2',
-      addressLocality: 'Belleville',
-      addressRegion: 'ON',
-      postalCode: 'K8N 4Z4',
-      addressCountry: 'CA',
-    },
+    address: postalAddress,
     areaServed: 'Ontario',
     serviceArea: {
       '@type': 'AdministrativeArea',
-      name: 'Belleville and Quinte region',
+      name: serviceAreaName,
     },
     amenityFeature: amenities.map((amenity) => ({
       '@type': 'LocationFeatureSpecification',
@@ -167,30 +54,17 @@ const structuredData = JSON.stringify([
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Legacy Events services',
-      itemListElement: [
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Wedding venue hosting',
-          },
+      itemListElement: servicePages.map((service) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: service.serviceName,
+          serviceType: service.serviceType,
+          url: `${siteUrl}/${service.slug}/`,
         },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Corporate gala hosting',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Private party hosting',
-          },
-        },
-      ],
+      })),
     },
+    ...optionalEventVenueSchema,
   },
   {
     '@context': 'https://schema.org',
@@ -246,65 +120,26 @@ const structuredData = JSON.stringify([
 ]);
 ---
 
-<html lang="en-CA">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="/assets/favicon.png" />
-    <link rel="apple-touch-icon" href="/assets/favicon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#1e4192" />
-    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={pageDescription} />
-    <meta name="author" content={venueName} />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang="en-CA" href={canonicalUrl} />
-    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={venueName} />
-    <meta property="og:locale" content="en_CA" />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={pageDescription} />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={ogImageUrl} />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Elegant event ballroom at Legacy Events" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={pageDescription} />
-    <meta name="twitter:image" content={ogImageUrl} />
-    <meta name="twitter:image:alt" content="Elegant event ballroom at Legacy Events" />
-    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs Guidance" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Inter:opsz,wght@14..32,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <script is:inline type="application/ld+json" set:html={structuredData}></script>
-    <title>{pageTitle}</title>
-  </head>
-  <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    <main id="main-content">
+<BaseLayout
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+  canonicalUrl={canonicalUrl}
+  ogImageUrl={ogImageUrl}
+  ogImageAlt="Elegant event ballroom at Legacy Events"
+  structuredData={structuredData}
+  venueName={venueName}
+>
       <section aria-labelledby="hero-heading" class="container-shell flex flex-col items-center pt-10 md:pt-20">
-        <div class="flex w-full max-w-[377px] flex-col items-center gap-5">
-          <Image src={logoMark} alt="Legacy Events script monogram logo" width={71} height={72} class="h-[48px] w-[47px] md:h-[72px] md:w-[71px]" loading="eager" />
-          <p class="font-['Fraunces'] font-[300] text-[16px] tracking-[2px] text-[color:var(--color-brand)] md:text-[20px] md:tracking-[3px]">LEGACY EVENTS</p>
-        </div>
+        <LogoLockup variant="hero" />
 
         <div class="flex w-full max-w-[1152px] flex-col items-center justify-center gap-6 px-0 pt-8 pb-4 md:gap-7 md:pt-10 md:pb-5">
           <h1 id="hero-heading" class="text-balance text-center font-['Fraunces'] text-[clamp(2.8rem,8.2vw,6.1rem)] leading-[1.1] font-[300] text-[color:var(--color-brand)]">Where your story<br />becomes a legacy</h1>
           <p class="max-w-[760px] text-balance text-center text-[16px] leading-[26px] font-[400] text-[color:var(--color-body)]">
             Legacy Events is a Belleville, Ontario venue for weddings, corporate galas, and private celebrations across the Quinte region.
           </p>
-          <a href="#contact" class="focus-ring inline-flex cursor-pointer items-center justify-center rounded-full bg-[color:var(--color-brand)] px-8 py-3 text-[16px] leading-6 font-[700] text-white no-underline transition [transition-property:transform,filter] hover:brightness-[0.94] hover:-translate-y-px motion-reduce:transition-none motion-reduce:hover:translate-y-0" aria-label="Get in touch with Legacy Events">
+          <ButtonLink href="#contact" ariaLabel="Get in touch with Legacy Events">
             Get in touch
-          </a>
+          </ButtonLink>
         </div>
       </section>
 
@@ -327,10 +162,7 @@ const structuredData = JSON.stringify([
 
       <section aria-labelledby="spaces-heading" class="container-shell py-16 md:py-20">
         <div class="mb-10 flex w-full items-end">
-          <div class="flex w-full max-w-[579px] flex-col gap-2">
-            <p class="text-[12px] leading-4 font-[400] tracking-[2.4px] uppercase text-[color:var(--color-body)]">Our spaces</p>
-            <h2 id="spaces-heading" class="text-balance text-[clamp(1.9rem,2.7vw,2.25rem)] leading-[1.12] font-[400] text-[color:var(--color-heading)]">Host weddings and events in Belleville</h2>
-          </div>
+          <SectionIntro eyebrow="Our spaces" heading="Host weddings and events in Belleville" headingId="spaces-heading" />
         </div>
 
         <div
@@ -338,7 +170,6 @@ const structuredData = JSON.stringify([
           class="mobile-carousel md:grid md:grid-cols-3"
           role="region"
           aria-labelledby="spaces-heading"
-          tabindex="0"
         >
           {
             spaces.map((space) => (
@@ -372,10 +203,7 @@ const structuredData = JSON.stringify([
 
       <section aria-labelledby="amenities-heading" class="w-full bg-[color:var(--color-amenity-bg)] py-16 md:py-20">
         <div class="container-shell">
-          <div class="flex w-full max-w-[579px] flex-col gap-2">
-            <p class="text-[12px] leading-4 font-[400] tracking-[2.4px] uppercase text-[color:var(--color-brand)]">Amenities</p>
-            <h2 id="amenities-heading" class="text-balance text-[clamp(1.9rem,2.7vw,2.25rem)] leading-[1.12] font-[400] text-[color:var(--color-heading)]">Included amenities for seamless events</h2>
-          </div>
+          <SectionIntro eyebrow="Amenities" heading="Included amenities for seamless events" headingId="amenities-heading" eyebrowColor="brand" />
 
           <div
             id="amenities-carousel"
@@ -426,120 +254,8 @@ const structuredData = JSON.stringify([
       </section>
 
       <FaqAccordion items={faqItems} heading="Frequently asked questions before you book" idPrefix="home-faq" sectionId="faq" />
-    </main>
 
-    <Footer />
-
-    <script>
-      const isMobile = window.matchMedia('(max-width: 767px)').matches;
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      const scrollBehavior = () => (prefersReducedMotion.matches ? 'auto' : 'smooth');
-
-      const setupCarouselDots = (carouselId: string, dotsId: string, mobileOnly = true) => {
-        const track = document.getElementById(carouselId);
-        const dotsWrap = document.getElementById(dotsId);
-        if (!(track instanceof HTMLElement) || !(dotsWrap instanceof HTMLElement)) return;
-        if (mobileOnly && !isMobile) {
-          track.removeAttribute('tabindex');
-          return;
-        }
-
-        const slides = Array.from(track.children).filter((el): el is HTMLElement => el instanceof HTMLElement);
-        if (slides.length <= 1) return;
-        track.setAttribute('tabindex', '0');
-
-        dotsWrap.innerHTML = slides
-          .map(
-            (_, i) =>
-              `<button type="button" class="carousel-dot focus-ring" aria-label="Go to slide ${i + 1}" aria-controls="${carouselId}" aria-current="${i === 0}"></button>`,
-          )
-          .join('');
-
-        const dots = Array.from(dotsWrap.querySelectorAll<HTMLButtonElement>('.carousel-dot'));
-        let slidePositions = slides.map((slide) => slide.offsetLeft - track.offsetLeft);
-        let activeIndex = 0;
-
-        const setActiveDot = (index: number) => {
-          if (index === activeIndex) return;
-          activeIndex = index;
-          dots.forEach((dot, i) => {
-            dot.setAttribute('aria-current', i === index ? 'true' : 'false');
-          });
-        };
-
-        const updateSlidePositions = () => {
-          slidePositions = slides.map((slide) => slide.offsetLeft - track.offsetLeft);
-        };
-
-        dots.forEach((dot, i) => {
-          dot.addEventListener('click', () => {
-            track.scrollTo({
-              left: slidePositions[i],
-              behavior: scrollBehavior(),
-            });
-            setActiveDot(i);
-          });
-        });
-
-        const slideIndexByElement = new Map<HTMLElement, number>();
-        slides.forEach((slide, index) => slideIndexByElement.set(slide, index));
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return;
-              const index = slideIndexByElement.get(entry.target as HTMLElement);
-              if (typeof index === 'number') {
-                setActiveDot(index);
-              }
-            });
-          },
-          {
-            root: track,
-            threshold: 0.6,
-          },
-        );
-        slides.forEach((slide) => observer.observe(slide));
-
-        window.addEventListener('resize', updateSlidePositions, { passive: true });
-
-        track.addEventListener('keydown', (event) => {
-          if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-          event.preventDefault();
-          const currentIndexRaw = dots.findIndex((dot) => dot.getAttribute('aria-current') === 'true');
-          const currentIndex = currentIndexRaw >= 0 ? currentIndexRaw : 0;
-
-          let targetIndex = currentIndex;
-          if (event.key === 'ArrowRight') targetIndex = Math.min(slides.length - 1, currentIndex + 1);
-          if (event.key === 'ArrowLeft') targetIndex = Math.max(0, currentIndex - 1);
-          if (event.key === 'Home') targetIndex = 0;
-          if (event.key === 'End') targetIndex = slides.length - 1;
-
-          track.scrollTo({
-            left: slidePositions[targetIndex],
-            behavior: scrollBehavior(),
-          });
-          setActiveDot(targetIndex);
-        });
-      };
-
-      const initCarousels = () => {
-        setupCarouselDots('spaces-carousel', 'spaces-dots');
-        setupCarouselDots('amenities-carousel', 'amenities-dots');
-        setupCarouselDots('testimonials-carousel', 'testimonials-dots', false);
-      };
-
-      const win = window as Window & {
-        requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
-      };
-
-      if (typeof win.requestIdleCallback === 'function') {
-        win.requestIdleCallback(initCarousels, { timeout: 800 });
-      } else {
-        setTimeout(initCarousels, 0);
-      }
-
-    </script>
-    <Analytics />
-    <SpeedInsights />
-  </body>
-</html>
+  <Fragment slot="scripts">
+    <CarouselInit />
+  </Fragment>
+</BaseLayout>

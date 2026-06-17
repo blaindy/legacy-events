@@ -1,0 +1,35 @@
+---
+import { Image } from 'astro:assets';
+import logoMark from '../assets/logo-mark.svg';
+
+interface Props {
+  variant?: 'hero' | 'header';
+  href?: string;
+}
+
+const { variant = 'header', href } = Astro.props;
+
+const imageClasses = {
+  hero: 'h-[48px] w-[47px] md:h-[72px] md:w-[71px]',
+  header: 'h-11 w-11 md:h-14 md:w-14',
+};
+
+const textClasses = {
+  hero: "font-['Fraunces'] font-[300] text-[16px] tracking-[2px] text-[color:var(--color-brand)] md:text-[20px] md:tracking-[3px]",
+  header: "font-['Fraunces'] text-[18px] font-[300] tracking-[2.4px]",
+};
+---
+
+{
+  href ? (
+    <a href={href} class="focus-ring inline-flex items-center gap-3 rounded-sm text-[color:var(--color-brand)] no-underline">
+      <Image src={logoMark} alt="Legacy Events script monogram logo" width={71} height={72} class={imageClasses[variant]} loading="eager" />
+      <span class={textClasses[variant]}>LEGACY EVENTS</span>
+    </a>
+  ) : (
+    <div class="flex w-full max-w-[377px] flex-col items-center gap-5">
+      <Image src={logoMark} alt="Legacy Events script monogram logo" width={71} height={72} class={imageClasses[variant]} loading="eager" />
+      <p class={textClasses[variant]}>LEGACY EVENTS</p>
+    </div>
+  )
+}

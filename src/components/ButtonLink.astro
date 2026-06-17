@@ -1,0 +1,26 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'nav';
+  ariaLabel?: string;
+  class?: string;
+}
+
+const { href, variant = 'primary', ariaLabel, class: className = '' } = Astro.props;
+
+const baseClass =
+  'focus-ring inline-flex cursor-pointer items-center justify-center rounded-full font-[700] no-underline transition motion-reduce:transition-none motion-reduce:hover:translate-y-0';
+
+const variantClasses = {
+  primary:
+    'bg-[color:var(--color-brand)] px-8 py-3 text-[16px] leading-6 text-white [transition-property:transform,filter] hover:brightness-[0.94] hover:-translate-y-px',
+  secondary:
+    'border border-[color:var(--color-brand)] px-8 py-3 text-[16px] leading-6 text-[color:var(--color-brand)] [transition-property:transform,background-color] hover:bg-[color:var(--color-space-card)] hover:-translate-y-px',
+  nav:
+    'hidden bg-[color:var(--color-brand)] px-5 py-2.5 text-[14px] text-white [transition-property:transform,filter] hover:brightness-[0.94] hover:-translate-y-px md:inline-flex',
+};
+---
+
+<a href={href} class:list={[baseClass, variantClasses[variant], className]} aria-label={ariaLabel}>
+  <slot />
+</a>

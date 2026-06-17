@@ -1,0 +1,29 @@
+---
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  headingId?: string;
+  eyebrowColor?: 'body' | 'brand' | 'muted';
+  maxWidthClass?: string;
+  class?: string;
+}
+
+const { eyebrow, heading, headingId, eyebrowColor = 'body', maxWidthClass = 'max-w-[579px]', class: className = '' } = Astro.props;
+
+const eyebrowColors = {
+  body: 'text-[color:var(--color-body)]',
+  brand: 'text-[color:var(--color-brand)]',
+  muted: 'text-[color:var(--color-muted)]',
+};
+---
+
+<div class:list={['flex w-full flex-col gap-2', maxWidthClass, className]}>
+  {
+    eyebrow && (
+      <p class:list={['text-[12px] leading-4 font-[400] tracking-[2.4px] uppercase', eyebrowColors[eyebrowColor]]}>
+        {eyebrow}
+      </p>
+    )
+  }
+  <h2 id={headingId} class="text-balance text-[clamp(1.9rem,2.7vw,2.25rem)] leading-[1.12] font-[400] text-[color:var(--color-heading)]">{heading}</h2>
+</div>

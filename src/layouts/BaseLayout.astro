@@ -1,0 +1,61 @@
+---
+import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import SeoHead from '../components/SeoHead.astro';
+import { venueName as defaultVenueName } from '../lib/site';
+
+interface Props {
+  pageTitle: string;
+  pageDescription: string;
+  canonicalUrl: string;
+  ogImageUrl: string;
+  ogImageAlt: string;
+  structuredData: string;
+  venueName?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  includeFooter?: boolean;
+}
+
+const {
+  pageTitle,
+  pageDescription,
+  canonicalUrl,
+  ogImageUrl,
+  ogImageAlt,
+  structuredData,
+  venueName = defaultVenueName,
+  ogImageWidth = 1200,
+  ogImageHeight = 630,
+  includeFooter = true,
+} = Astro.props;
+---
+
+<html lang="en-CA">
+  <head>
+    <SeoHead
+      pageTitle={pageTitle}
+      pageDescription={pageDescription}
+      canonicalUrl={canonicalUrl}
+      ogImageUrl={ogImageUrl}
+      ogImageAlt={ogImageAlt}
+      structuredData={structuredData}
+      venueName={venueName}
+      ogImageWidth={ogImageWidth}
+      ogImageHeight={ogImageHeight}
+    />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <slot name="before-main" />
+    <main id="main-content">
+      <slot />
+    </main>
+    {includeFooter && <Footer />}
+    <slot name="scripts" />
+    <Analytics />
+    <SpeedInsights />
+  </body>
+</html>
